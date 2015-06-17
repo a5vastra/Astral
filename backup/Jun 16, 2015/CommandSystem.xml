@@ -3,6 +3,5 @@
   <Commands>
     <a>&lt;message='this is a test'/&gt;</a>
     <b>&lt;message='this is another test'/&gt;&lt;regex='^\+\d+$'/&gt;</b>
-    <c>&lt;command='!test2'/&gt;&lt;message='this was added during runtime'/&gt;</c>
   </Commands>
 </CommandSystem>
