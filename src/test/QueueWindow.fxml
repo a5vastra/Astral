@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.QueueWindow">
+<AnchorPane style="-fx-border-color: #000000; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.QueueWindow">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane opacity="0.9" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <BorderPane opacity="0.8" prefHeight="22.0" prefWidth="200.0" style="-fx-background-color: #15171a;" BorderPane.alignment="CENTER">
+            <BorderPane prefHeight="22.0" prefWidth="200.0" style="-fx-background-color: #15171a;" BorderPane.alignment="CENTER">
                <center>
                   <Label prefHeight="17.0" prefWidth="166.0" text="a5vBot Astral :: Queuer System" textFill="WHITE" BorderPane.alignment="CENTER">
                      <font>

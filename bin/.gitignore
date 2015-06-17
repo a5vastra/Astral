@@ -1,0 +1,9 @@
+/.DS_Store
+/addons/
+/controller/
+/download.png
+/helpers/
+/main/
+/test/
+*.log
+*.class

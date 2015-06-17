@@ -64,7 +64,7 @@ public class Starter {
         {
 	        try
 	        {
-	        	bot.connect("irc.twitch.tv", 80, auth);
+	        	bot.connect("irc.twitch.tv", 6667, auth);
 	        }
 	        catch(Exception e)
 	        {

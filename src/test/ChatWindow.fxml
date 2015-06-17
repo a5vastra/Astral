@@ -32,7 +32,7 @@
       </BorderPane>
    </bottom>
    <center>
-      <TextArea fx:id="txaAllMessages" blendMode="MULTIPLY" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Chat Messages Go Here" style="-fx-text-fill: black;" wrapText="true" BorderPane.alignment="CENTER">
+      <TextArea fx:id="txaAllMessages" editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" promptText="Chat Messages Go Here" style="-fx-text-fill: black;" wrapText="true" BorderPane.alignment="CENTER">
          <font>
             <Font name="Seravek Medium" size="14.0" />
          </font>
@@ -42,7 +42,7 @@
       <Bloom threshold="0.99" />
    </effect>
    <top>
-      <BorderPane opacity="0.8" prefHeight="19.0" prefWidth="290.0" style="-fx-background-color: #15171a;" BorderPane.alignment="CENTER">
+      <BorderPane opacity="0.9" prefHeight="19.0" prefWidth="290.0" style="-fx-background-color: #15171a;" BorderPane.alignment="CENTER">
          <center>
             <Label text="a5vBot Astral :: Chat Window" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>

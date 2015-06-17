@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import test.PointWindow;
 import main.MyBot;
 
 public class PointSystem extends Addon{
@@ -86,7 +87,25 @@ public class PointSystem extends Addon{
 				if(attemptToEditPoints(m.group("name"), Integer.parseInt(m.group("points"))))
 					msg(sender+" awards "+m.group("points")+" points to "+m.group("name")+".");
 				changed = true;
-			} 
+			}
+			
+			p = getOrRegisterPattern("pointSet", "^!pointset (?<name>\\w+) (?<points>\\d+)$");
+			m = p.matcher(message);
+			if(find(m))
+			{
+				int cur;
+				PointAccount pa;
+				if((pa = findPointAccount(m.group("name")))!= null)
+				{
+					cur = pa.getPoints();
+					if(attemptToEditPoints(m.group("name"), Integer.parseInt(m.group("points")) - cur))
+					{
+						msg(sender+" sets "+m.group("name")+"'s points to "+m.group("points")+".");
+						changed = true;
+					}
+				}
+			}
+			
 			p = getOrRegisterPattern("pointAwardAll", "^!pointawardall (?<points>\\d+)$");
 			m = p.matcher(message);
 			if(find(m))
@@ -178,7 +197,10 @@ public class PointSystem extends Addon{
 		}
 		
 		if(changed)
+		{
+			PointWindow.forceRefresh();
 			Save();
+		}
 	}
 	@Override
 	public void doneWithTime(String key)
@@ -218,6 +240,14 @@ public class PointSystem extends Addon{
 		}
 		return account;
 	}
+	public void setPointsTo(String name, int value)
+	{
+		PointAccount pa;
+		if((pa = findPointAccount(name)) != null)
+		{
+			msg("!pointset "+name+" "+(value));
+		}
+	}
 	protected int minimumMinutesElapsed(){return Integer.parseInt(nullCoalescingSetting("minimumMinutesElapsed","5"));}
 	protected int minimumMessagesElapsed(){return Integer.parseInt(nullCoalescingSetting("minimumMessagesElapsed","5"));}
 	protected int pointReward(){return Integer.parseInt(nullCoalescingSetting("pointReward","0"));}
@@ -233,10 +263,12 @@ public class PointSystem extends Addon{
 		boolean present = false;
 		int minutesElapsed;
 		int messagesElapsed;
+		public final int initPoints; 
 		public PointAccount(String name, int points)
 		{
 			this.name = name;
 			this.points = points;
+			this.initPoints = points;
 		}
 		public int getPoints(){return points;}
 		public String getName(){return name;}

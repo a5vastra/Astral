@@ -120,4 +120,8 @@ public abstract class Addon {
 	{
 		
 	}
+	public HashMap<String, String> getSettings()
+	{
+		return map.get("Settings");
+	}
 }

@@ -29,10 +29,10 @@ public class ChatLauncher extends ApplicationLauncher {
 		Parent root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("ChatWindow.fxml"));
-			/*String image = this.getClass().getResource("download.png").toExternalForm();
+			String image = this.getClass().getResource("download1.png").toExternalForm();
 			root.setStyle("-fx-background-image: url('" + image + "'); " +
 			           "-fx-background-position: center center; " +
-			           "-fx-background-repeat: stretch;");*/
+			           "-fx-background-repeat: stretch;");
 			stage = new Stage();
 			stage.initStyle(StageStyle.DECORATED);
 			stage.setScene(new Scene(root));
