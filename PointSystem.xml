@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PointSystem>
+  <Points>
+    <a5vastra>10</a5vastra>
+  </Points>
+  <Settings>
+    <minimumMinutesElapsed>10</minimumMinutesElapsed>
+    <minimumMessagesElapsed>42</minimumMessagesElapsed>
+    <pointReward>30</pointReward>
+  </Settings>
+</PointSystem>

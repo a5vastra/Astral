@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CommandSystem>
+  <Commands>
+    <a>&lt;command='!test1'/&gt;&lt;message='this is a test'/&gt;</a>
+    <b>&lt;message='this is another test'/&gt;&lt;regex='^\+\d+$'/&gt;</b>
+  </Commands>
+</CommandSystem>
