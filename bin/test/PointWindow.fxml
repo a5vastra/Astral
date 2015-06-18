@@ -71,9 +71,9 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.95" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="tblSettings" prefHeight="357.0" prefWidth="442.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tblSettings" editable="true" prefHeight="357.0" prefWidth="442.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn fx:id="colSettingSetting" prefWidth="233.0" text="Setting" />
+                                  <TableColumn fx:id="colSettingsSetting" editable="false" prefWidth="233.0" text="Setting" />
                                   <TableColumn fx:id="colSettingsValue" prefWidth="206.0" text="Value" />
                                 </columns>
                               </TableView>

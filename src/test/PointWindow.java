@@ -136,13 +136,13 @@ public class PointWindow extends BorderPane implements javafx.fxml.Initializable
 		if(map == null || map.isEmpty())
 			return;
 		
-		//tblSetting.getItems().clear();
+		tblSettings.getItems().clear();
 		
 		final ObservableList<_Setting> data = FXCollections.observableArrayList();
 		for(Entry<String, String> e : map.entrySet())
 			data.add(new _Setting(e.getKey(), e.getValue()));
 
-		//tblSetting.setItems(data);
+		tblSettings.setItems(data);
 	}
 	
 	XYChart.Series seriesViewers = new XYChart.Series();
@@ -174,7 +174,7 @@ public class PointWindow extends BorderPane implements javafx.fxml.Initializable
 	@FXML
 	private TableView tblMain;
 	@FXML 
-	private TableView tblSetting;
+	private TableView tblSettings;
 	@FXML 
 	private Label lblVisualization;
 	@Override	
@@ -213,19 +213,23 @@ public class PointWindow extends BorderPane implements javafx.fxml.Initializable
 				);
 		colMainDelta.setCellValueFactory(
 				new PropertyValueFactory<_PointAccount,String>("delta"));
-		/*
+		
+		
+		
 		colSettingsSetting.setCellValueFactory(
-				new PropertyValueFactory<_PointAccount,String>("key"));
+				new PropertyValueFactory<_Setting,String>("key"));
 		colSettingsValue.setCellValueFactory(
-				new PropertyValueFactory<_PointAccount,String>("value"));
+				new PropertyValueFactory<_Setting,String>("value"));
 		colSettingsValue.setCellFactory(TextFieldTableCell.forTableColumn());
 		colSettingsValue.setOnEditCommit(
 				new EventHandler<CellEditEvent<_Setting, String>>() {
 					@Override
 					public void handle(CellEditEvent<_Setting, String> t) {
-						
+						String val = t.getNewValue();
+						String name = t.getRowValue().getKey();
+						pointSystem().setSettingTo(name, val+"");
 					}
 				}
-				);*/
+				);
 	}	
 }

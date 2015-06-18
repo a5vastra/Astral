@@ -122,7 +122,7 @@ public class PointSystem extends Addon{
 			String pointSettingsString = "("
 					+ "pointName"
 					+ ")";
-			p = getOrRegisterPattern("pointSettingsString", "^(?<settingName>"+pointSettingsString+") (?<settingInfo>\\w+)$");
+			p = getOrRegisterPattern("pointSettingsString", "^!pointsetting (?<settingName>"+pointSettingsString+") (?<settingInfo>\\w+)$");
 			m = p.matcher(message);
 			if(find(m))
 			{
@@ -139,7 +139,7 @@ public class PointSystem extends Addon{
 					+ "pointReward"
 					+ "followerRewardMultiplier"
 					+ ")";
-			p = getOrRegisterPattern("pointSettingsInteger", "^(?<settingName>"+pointSettingsInteger+") (?<settingInfo>\\d+)$");
+			p = getOrRegisterPattern("pointSettingsInteger", "^!pointsetting (?<settingName>"+pointSettingsInteger+") (?<settingInfo>\\d+)$");
 			m = p.matcher(message);
 			if(find(m))
 			{
@@ -247,6 +247,10 @@ public class PointSystem extends Addon{
 		{
 			msg("!pointset "+name+" "+(value));
 		}
+	}
+	public void setSettingTo(String name, String value)
+	{
+		msg("!pointsetting "+name+" "+value);
 	}
 	protected int minimumMinutesElapsed(){return Integer.parseInt(nullCoalescingSetting("minimumMinutesElapsed","5"));}
 	protected int minimumMessagesElapsed(){return Integer.parseInt(nullCoalescingSetting("minimumMessagesElapsed","5"));}
