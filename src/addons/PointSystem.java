@@ -27,8 +27,8 @@ public class PointSystem extends Addon{
 	{
 		FileManager fm = new FileManager(getName());
 		map = fm.Load(getName());
-		settings = map.get(MyInformation.Settings.name());
-		for(Entry<String, String> ePointAccount : map.get(MyInformation.Points.name()).entrySet())
+		settings = mapGet(MyInformation.Settings.name());
+		for(Entry<String, String> ePointAccount : mapGet(MyInformation.Points.name()).entrySet())
 		{
 			PointAccount pa = new PointAccount(ePointAccount.getKey(), Integer.parseInt(ePointAccount.getValue()));
 			pointAccounts.add(pa);
@@ -126,7 +126,7 @@ public class PointSystem extends Addon{
 			m = p.matcher(message);
 			if(find(m))
 			{
-				HashMap<String,String> settings = map.get(MyInformation.Settings.name());
+				HashMap<String,String> settings = mapGet(MyInformation.Settings.name());
 				settings.put(m.group("settingName"), m.group("settingInfo"));
 				map.put(MyInformation.Settings.name(), settings);
 				msg("Change to "+m.group("settingName")+" confirmed.");
@@ -143,7 +143,7 @@ public class PointSystem extends Addon{
 			m = p.matcher(message);
 			if(find(m))
 			{
-				HashMap<String,String> settings = map.get(MyInformation.Settings.name());
+				HashMap<String,String> settings = mapGet(MyInformation.Settings.name());
 				settings.put(m.group("settingName"), m.group("settingInfo"));
 				map.put(MyInformation.Settings.name(), settings);
 				msg("Change to "+m.group("settingName")+" confirmed.");

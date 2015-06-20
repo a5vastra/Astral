@@ -122,6 +122,12 @@ public abstract class Addon {
 	}
 	public HashMap<String, String> getSettings()
 	{
-		return map.get("Settings");
+		return mapGet("Settings");
+	}
+	public HashMap<String, String> mapGet(String name)
+	{
+		if(!map.containsKey(name))
+			map.put(name, new HashMap<String, String>());
+		return map.get(name);
 	}
 }

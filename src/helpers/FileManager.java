@@ -47,7 +47,8 @@ public class FileManager {
 			File file = new File(className+".xml");
 			if(!file.exists())
 			{
-				file.createNewFile();
+				//file.createNewFile();
+				return new HashMap<String, HashMap<String, String>>();
 			}
 			else
 			{

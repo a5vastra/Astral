@@ -28,18 +28,13 @@ public class CommandSystem extends Addon{
 	{
 		FileManager fm = new FileManager(getName());
 		map = fm.Load(getName());
-		settings = map.get(MyInformation.Commands.name());
-		try
+		settings = mapGet(MyInformation.Commands.name());
 		{
-			for(Entry<String, String> e : map.get(MyInformation.Commands.name()).entrySet())
+			for(Entry<String, String> e : mapGet(MyInformation.Commands.name()).entrySet())
 			{
 				Command c = new Command(e.getValue());
 				commands.add(c);
 			}
-		}
-		catch(Exception e)
-		{
-			error("No information found for file "+getName()+".xml");
 		}
 	}
 	@Override
@@ -51,7 +46,7 @@ public class CommandSystem extends Addon{
 			int i = 0;
 			for(Command c : commands)
 			{
-				commandsHash.put("abcdefghijklmnopqrstuvwxyz".charAt(i++)+"", c.toString());
+				commandsHash.put("_"+(i++)+"", c.toString());
 			}
 			map.put(MyInformation.Commands.name(), commandsHash);
 		}

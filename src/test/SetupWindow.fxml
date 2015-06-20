@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #15171a;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.SetupWindow">
+   <top>
+      <BorderPane opacity="0.95" prefHeight="33.0" prefWidth="600.0" style="-fx-background-color: #15171a;" BorderPane.alignment="CENTER">
+         <center>
+            <Label text="a5vBot Astral :: Setup" textFill="#70d4ff" BorderPane.alignment="CENTER_LEFT">
+               <font>
+                  <Font name="Seravek ExtraLight" size="24.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </Label>
+         </center>
+         <right>
+            <Label text="[created by a5vAstra] more info at a5vbot.com" textFill="#00ff77" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Seravek ExtraLight" size="13.0" />
+               </font>
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
+            </Label>
+         </right>
+         <effect>
+            <DropShadow />
+         </effect>
+      </BorderPane>
+   </top>
+   <bottom>
+      <AnchorPane prefHeight="0.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <ProgressBar fx:id="Progress" layoutX="77.0" prefHeight="33.0" prefWidth="465.0" progress="0.16" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="0.0" />
+            <Button defaultButton="true" layoutX="542.0" mnemonicParsing="false" onAction="#next" prefHeight="26.0" prefWidth="58.0" text="Next">
+               <font>
+                  <Font name="Seravek ExtraLight" size="16.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#prev" text="Previous">
+               <font>
+                  <Font name="Seravek ExtraLight" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <StackPane fx:id="stackPane" opacity="0.9" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="P1" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TextArea editable="false" prefHeight="344.0" prefWidth="600.0" text="Hi and welcome to the a5vBot remake.&#10;I'm &quot;a5v Astra&quot;, the creator of this.&#10;&#10;It's a complete remake from the ground up, so some of the functionality isn't here yet, but the framework and GUI are much better, and I'll be sure to update it frequently.&#10;&#10;I hope you'll appreciate my effort.&#10;&#10;PS: If you're a java programmer interested in adding features, I'm considering letting people do that.&#10;" wrapText="true">
+                     <font>
+                        <Font name="Seravek ExtraLight" size="20.0" />
+                     </font>
+                  </TextArea>
+                  <Hyperlink fx:id="linkGithub" layoutX="289.0" layoutY="263.0" onAction="#HyperLink" prefHeight="31.0" prefWidth="311.0" text="http://github.com/a5vAstra/Astral">
+                     <font>
+                        <Font name="Seravek ExtraLight" size="18.0" />
+                     </font>
+                  </Hyperlink>
+               </children>
+            </AnchorPane>
+            <SplitPane fx:id="P2" dividerPositions="0.44648829431438125" prefHeight="160.0" prefWidth="200.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="345.0" prefWidth="322.0">
+                     <children>
+                        <Label layoutX="-2.0" layoutY="6.0" prefHeight="81.0" prefWidth="252.0" text="Channel Owner">
+                           <font>
+                              <Font name="Seravek ExtraLight" size="36.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="fldChannelOwner" layoutY="80.0" prefHeight="40.0" prefWidth="262.0" promptText="a5vAstra" />
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TextArea editable="false" prefHeight="344.0" prefWidth="321.0" text="Enter the twitchtv account name of the channel owner. This is the person whose channel will be joined." wrapText="true">
+                           <font>
+                              <Font name="Seravek ExtraLight" size="26.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <SplitPane fx:id="P3" dividerPositions="0.44648829431438125" layoutX="10.0" layoutY="10.0" prefHeight="160.0" prefWidth="200.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="345.0" prefWidth="322.0">
+                     <children>
+                        <Label layoutX="-2.0" layoutY="6.0" prefHeight="81.0" prefWidth="252.0" text="Bot Operator">
+                           <font>
+                              <Font name="Seravek ExtraLight" size="36.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="fldBotOperator" layoutY="80.0" prefHeight="40.0" prefWidth="262.0" promptText="a5vAstra" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TextArea editable="false" prefHeight="344.0" prefWidth="321.0" text="Enter the twitchtv account name of the bot operator. &#10;&#10;If the channel owner is also the one operating the bot, you can skip this step. You're the one setting up the bot, so this will usually be your twitchtv name." wrapText="true">
+                           <font>
+                              <Font name="Seravek ExtraLight" size="26.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+            <SplitPane fx:id="P4" dividerPositions="0.44648829431438125" layoutX="10.0" layoutY="10.0" prefHeight="160.0" prefWidth="200.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="345.0" prefWidth="322.0">
+                     <children>
+                        <Label layoutX="-2.0" layoutY="6.0" prefHeight="81.0" prefWidth="252.0" text="Bot Name">
+                           <font>
+                              <Font name="Seravek ExtraLight" size="36.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="fldBotName" layoutY="80.0" prefHeight="40.0" prefWidth="262.0" promptText="a5vBot" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TextArea editable="false" prefHeight="344.0" prefWidth="321.0" text="Do you want a custom bot name? Go to twitch.tv and register a new account under your desired bot name, and write it here." wrapText="true">
+                           <font>
+                              <Font name="Seravek ExtraLight" size="26.0" />
+                           </font>
+                        </TextArea>
+                        <Hyperlink fx:id="linkSignup" layoutY="253.0" onAction="#HyperLink" prefHeight="43.0" prefWidth="313.0" text="https://secure.twitch.tv/signup">
+                           <font>
+                              <Font name="Seravek ExtraLight" size="23.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+            <SplitPane fx:id="P5" dividerPositions="0.44648829431438125" layoutX="10.0" layoutY="10.0" prefHeight="160.0" prefWidth="200.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="345.0" prefWidth="322.0">
+                     <children>
+                        <Label layoutX="-2.0" layoutY="6.0" prefHeight="81.0" prefWidth="252.0" text="Bot Oauth">
+                           <font>
+                              <Font name="Seravek ExtraLight" size="36.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="fldBotOauth" layoutY="80.0" prefHeight="40.0" prefWidth="262.0" promptText="oauth:5ho1g7djc89c2qmtigdim1nlcav2wo" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TextArea editable="false" prefHeight="344.0" prefWidth="321.0" text="You now need to verify your account to give this program permission to use your bot's twitchtv account. Log out of your normal twitchtv account and into your bot's. Then navigate           and enter the oauth." wrapText="true">
+                           <font>
+                              <Font name="Seravek ExtraLight" size="26.0" />
+                           </font>
+                        </TextArea>
+                        <Hyperlink fx:id="linkOauth" layoutX="111.0" layoutY="244.0" onAction="#HyperLink" prefHeight="40.0" prefWidth="67.0" text="here">
+                           <font>
+                              <Font name="Seravek ExtraLight" size="23.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+            <AnchorPane fx:id="P6" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TextArea fx:id="finalPage" editable="false" prefHeight="344.0" prefWidth="600.0" text="Okay, you're done setting up!&#10;&#10;I hope that wasn't so hard.&#10;&#10;&#10;" wrapText="true">
+                     <font>
+                        <Font name="Seravek ExtraLight" size="20.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

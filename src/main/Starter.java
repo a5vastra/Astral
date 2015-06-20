@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import test.BaseLauncher;
 import test.ChatLauncher;
+import test.SetupLauncher;
 import controller.ControllerChat;
 
 
@@ -34,13 +35,13 @@ public class Starter {
         		{
         			switch(e2.getKey())
         			{
-        			case "ownerName":
+        			case "ChannelOwner":
         				ownerName = e2.getValue();
         				break;
-        			case "botName":
+        			case "BotName":
         				botName = e2.getValue();
         				break;
-        			case "oauth":
+        			case "BotOauth":
         				oauth = e2.getValue();
         				break;
         			}
@@ -52,6 +53,7 @@ public class Starter {
         else
         {
         	//Start("oauth:b2myk8mwj2dq3q8fh1fgosuosnr7op", "a5vastra", "a5vbot");
+        	SetupLauncher.begin();
         }
     }
     public static void Start(String auth, String owner, String botName) throws Exception
