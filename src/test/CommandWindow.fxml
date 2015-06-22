@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane opacity="0.95" prefHeight="346.0" prefWidth="719.0" style="-fx-background-color: #000000; -fx-border-color: #000000; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.CommandWindow">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <BorderPane prefHeight="22.0" prefWidth="200.0" style="-fx-background-color: #15171a;" BorderPane.alignment="CENTER">
+               <center>
+                  <Label prefHeight="17.0" prefWidth="197.0" text="a5vBot Astral :: Command System" textFill="WHITE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Seravek ExtraLight" size="13.0" />
+                     </font>
+                  </Label>
+               </center>
+               <effect>
+                  <Glow />
+               </effect>
+            </BorderPane>
+         </top>
+         <center>
+            <TabPane opacity="0.95" prefHeight="446.0" prefWidth="759.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab text="Main">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.95" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="313.0" prefWidth="675.0">
+                                 <center>
+                                    <TableView fx:id="tblMain" editable="true" prefHeight="282.0" prefWidth="659.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+                                      <columns>
+                                        <TableColumn fx:id="colMainIsRegex" editable="false" prefWidth="63.0" text="Is Regex" />
+                                        <TableColumn fx:id="colMainKey" editable="false" prefWidth="168.0" text="Key (Command)" />
+                                          <TableColumn fx:id="colMainMessage" prefWidth="346.0" text="Message" />
+                                          <TableColumn fx:id="colMainAccessibility" minWidth="0.0" prefWidth="98.0" text="Accessibility" />
+                                      </columns>
+                                    </TableView>
+                                 </center>
+                                 <bottom>
+                                    <Button mnemonicParsing="false" onAction="#removeCommand" prefHeight="33.0" prefWidth="664.0" text="Remove Current Selected Command" BorderPane.alignment="CENTER" />
+                                 </bottom>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Visualization">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #EEEEEE;">
+                           <children>
+                              <Label alignment="CENTER" layoutY="298.0" prefHeight="33.0" prefWidth="442.0" text="Commands by Use" textAlignment="CENTER" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0">
+                                 <font>
+                                    <Font name="Seravek ExtraLight" size="27.0" />
+                                 </font>
+                              </Label>
+                              <PieChart fx:id="chtVisualization" layoutX="1.0" prefHeight="185.0" prefWidth="675.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Add">
+                     <content>
+                        <TabPane>
+                           <tabs>
+                              <Tab closable="false" text="Command">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #EEEEEE;">
+                                       <children>
+                                          <TextField fx:id="txtAddCommandCommand" layoutX="123.0" layoutY="28.0" prefHeight="26.0" prefWidth="463.0" promptText="a regular command, like !test1" />
+                                          <Label layoutX="14.0" layoutY="33.0" prefHeight="16.0" prefWidth="100.0" text="Command">
+                                             <font>
+                                                <Font name="Seravek ExtraLight" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="14.0" layoutY="59.0" prefHeight="16.0" prefWidth="100.0" text="Message">
+                                             <font>
+                                                <Font name="Seravek ExtraLight" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txtAddCommandMessage" layoutX="123.0" layoutY="54.0" prefHeight="26.0" prefWidth="463.0" promptText="what will the bot respond with? what is the message?" />
+                                          <Label layoutX="14.0" layoutY="85.0" prefHeight="16.0" prefWidth="100.0" text="Accessibility">
+                                             <font>
+                                                <Font name="Seravek ExtraLight" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Button layoutX="398.0" layoutY="83.0" mnemonicParsing="false" onAction="#addCommand" prefHeight="26.0" prefWidth="189.0" text="Add" />
+                                          <ChoiceBox fx:id="chcAddCommandAccessibility" layoutX="123.0" layoutY="83.0" prefWidth="150.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab closable="false" text="Regex">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #EEEEEE;">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="32.0" prefHeight="16.0" prefWidth="100.0" text="Regex">
+                                             <font>
+                                                <Font name="Seravek ExtraLight" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txtAddRegexRegex" layoutX="124.0" layoutY="27.0" prefHeight="26.0" prefWidth="463.0" promptText="regex command, like ^\w+(\d|\s)*$" />
+                                          <Label layoutX="14.0" layoutY="58.0" prefHeight="16.0" prefWidth="100.0" text="Message">
+                                             <font>
+                                                <Font name="Seravek ExtraLight" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="txtAddRegexMessage" layoutX="123.0" layoutY="53.0" prefHeight="26.0" prefWidth="463.0" promptText="what will the bot respond with? what is the message?" />
+                                          <Label layoutX="14.0" layoutY="84.0" prefHeight="16.0" prefWidth="100.0" text="Accessibility">
+                                             <font>
+                                                <Font name="Seravek ExtraLight" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Button layoutX="398.0" layoutY="82.0" mnemonicParsing="false" onAction="#addRegex" prefHeight="26.0" prefWidth="185.0" text="Add" />
+                                          <Label fx:id="lblAddRegexInvalid" layoutX="602.0" layoutY="32.0" text="INVALID" textFill="RED">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <ChoiceBox fx:id="chcAddRegexAccessibility" layoutX="124.0" layoutY="82.0" prefWidth="150.0" />
+                                          <TextField layoutX="90.0" layoutY="121.0" onAction="#tryOutRegex" prefHeight="38.0" prefWidth="266.0" promptText="try out your regex: enter a potential match" />
+                                          <Label layoutX="14.0" layoutY="130.0" prefHeight="16.0" prefWidth="100.0" text="Try it out!">
+                                             <font>
+                                                <Font name="Seravek ExtraLight" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lblAddRegexValid" layoutX="602.0" layoutY="32.0" text="VALID" textFill="#00ff49">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lblAddRegexMatch" layoutX="419.0" layoutY="119.0" prefHeight="43.0" prefWidth="144.0" text="MATCH" textFill="#00ff49">
+                                             <font>
+                                                <Font name="System Bold" size="32.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="lblAddRegexNotMatch" layoutX="371.0" layoutY="119.0" prefHeight="43.0" prefWidth="251.0" text="NOT A MATCH" textFill="RED">
+                                             <font>
+                                                <Font name="System Bold" size="32.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </center>
+         <effect>
+            <Glow level="0.17" />
+         </effect>
+      </BorderPane>
+   </children>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>

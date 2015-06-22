@@ -100,14 +100,16 @@ public class MyBot extends PircBot{
 	 {
 		 if(instance == null) return;
 		 //Try sending a command. If nothing uses it, then send it as a message.
-		 if(!instance.onMessage(botName, msg))
+		 /*if(!instance.onMessage(botName, msg))
 		 {
 			 instance.sendMessage("#"+ownerName, msg);
 		 }
 		 else
 		 {
 			 instance.getAddon("ChatSystem").onMsg(botName, msg);
-		 }
+		 }*/
+		 instance.sendMessage("#"+ownerName, msg);
+		 instance.onMessage(botName, msg);
 	 }
 	 public static void directMessage(String msg)
 	 {

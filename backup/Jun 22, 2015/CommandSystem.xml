@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CommandSystem>
+  <Commands>
+    <_0>&lt;command='!test2'/&gt; &lt;message='msg'/&gt; &lt;accessibility='all'/&gt; </_0>
+    <_1>&lt;command='!test4'/&gt; &lt;message='thisnss issna atest wmesage'/&gt; &lt;accessibility='all'/&gt; </_1>
+  </Commands>
+</CommandSystem>

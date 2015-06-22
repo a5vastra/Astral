@@ -314,6 +314,8 @@ public class PointSystem extends Addon{
 	
 	public List<PointAccount> getTopRanked(int num)
 	{
+		if(num == -1)
+			num = Integer.MAX_VALUE;
 		if(num > 25)
 			num = 25;
 		List<PointAccount> result = new ArrayList<PointAccount>();

@@ -104,7 +104,8 @@ public class BaseWindow extends BorderPane implements javafx.fxml.Initializable 
 			register(1, "ChatSystem", new ChatLauncher());
 			register(2, "QueueSystem", new QueueLauncher());
 			register(3, "PointSystem", new PointLauncher());
-			for(int i = 4; i <= 8; i++)
+			register(4, "CommandSystem", new CommandLauncher());
+			for(int i = 5; i <= 8; i++)
 				register(i, "", null);
 		}
 		

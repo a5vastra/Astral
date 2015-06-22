@@ -10,10 +10,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import test.CommandWindow;
 import main.MyBot;
 
 public class CommandSystem extends Addon{
 	List<Command> commands = new ArrayList<Command>();
+	public List<Command> getCommands(){return new ArrayList<Command>(commands);}
 	public CommandSystem()
 	{
 		myName = "CommandSystem";
@@ -83,7 +85,7 @@ public class CommandSystem extends Addon{
 				Command toRemove = null;
 				for(Command c : commands)
 				{
-					if(c.isMatch(sender, m.group("command")))
+					if(c.getCommandOrRegex().equals(m.group("command")))
 					{
 						toRemove = c;
 						break;
@@ -106,7 +108,7 @@ public class CommandSystem extends Addon{
 				String s = "All commands: ";
 				for(Command c : commands)
 				{
-					s += "{"+c.toString()+"} ";
+					s += "{"+c.toString()+"}     ";
 				}
 				msg(s);
 			}
@@ -119,14 +121,20 @@ public class CommandSystem extends Addon{
 			}
 		}
 		if(changeMade)
+		{
 			Save();
+			CommandWindow.forceRefresh();
+		}
 	}
-	protected class Command
+	public class Command
 	{
 		private String command = "";
 		private String message = "";
 		private String regex = "";
 		private String accessibility = "all";
+		public boolean isRegex(){ return !regex.equals(""); }
+		public String getMessage(){ return message; }
+		public String getAccessibility(){ return accessibility; }
 		protected Command(String input)
 		{
 			Pattern p;
@@ -209,11 +217,12 @@ public class CommandSystem extends Addon{
 		{
 			String s = "";
 			if(!command.equals(""))
-				s += "<command='"+command+"'/>";
+				s += "<command='"+command+"'/> ";
 			if(!message.equals(""))
-				s += "<message='"+message+"'/>";
+				s += "<message='"+message+"'/> ";
 			if(!regex.equals(""))
-				s += "<regex='"+regex+"'/>";
+				s += "<regex='"+regex+"'/> ";
+			s += "<accessibility='"+accessibility+"'/> ";
 			return (s);
 		}
 	}

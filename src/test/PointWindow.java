@@ -76,8 +76,10 @@ public class PointWindow extends BorderPane implements javafx.fxml.Initializable
 	private int sliderValue = 1;
 	private void refresh()
 	{		
-		List<PointSystem.PointAccount> list = pointSystem().getTopRanked(sliderValue);
+		List<PointSystem.PointAccount> list;
+		list = pointSystem().getTopRanked(sliderValue);
 		visualization(list);
+		list = pointSystem().getTopRanked(-1);
 		main(list);
 		settings(pointSystem().getSettings());
 	}
