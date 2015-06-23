@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import addons.CommandSystem;
+import addons.PointSystem;
 import addons.CommandSystem.Command;
 import main.MyBot;
 import javafx.beans.property.SimpleStringProperty;
@@ -16,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -37,7 +39,6 @@ public class CommandWindow extends BorderPane implements javafx.fxml.Initializab
 			commandSystem = (CommandSystem)MyBot.instance.getAddon("CommandSystem");
 		return commandSystem; 
 	}
-	@FXML private PieChart chtVisualization ;
 	@FXML private TableColumn colMainIsRegex ;
 	@FXML private ChoiceBox chcAddCommandAccessibility ;
 	@FXML private TextField txtAddRegexMessage ;
@@ -116,6 +117,7 @@ public class CommandWindow extends BorderPane implements javafx.fxml.Initializab
 			data.add(new _Command(c));
 
 		tblMain.setItems(data);
+		
 	}
 	public static class _Command
 	{
