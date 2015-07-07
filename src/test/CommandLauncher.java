@@ -18,7 +18,7 @@ public class CommandLauncher extends ApplicationLauncher {
 	@Override
 	public void secondary()
 	{
-		if(ChatWindow.getInstance() != null)
+		if(CommandWindow.getInstance() != null)
 		{
 			stage.show();
 			stage.setAlwaysOnTop(true);

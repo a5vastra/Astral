@@ -2,7 +2,9 @@ package test;
 import helpers.MiniTimer;
 
 import java.net.URL;
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TreeMap;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -29,7 +31,8 @@ import javafx.application.Application;
 
 public class BaseWindow extends BorderPane implements javafx.fxml.Initializable {
 	private static BaseWindow instance;
-	private HashMap<Integer, ApplicationLauncher> launcherMap = new HashMap<Integer, ApplicationLauncher>();
+	private TreeMap<Integer, ApplicationLauncher> launcherMap = new TreeMap<Integer, ApplicationLauncher>();
+	private TreeMap<Integer, Addon> addonMap = new TreeMap<Integer, Addon>();
 	private long counter = 0;
 	public BaseWindow()
 	{
@@ -105,6 +108,7 @@ public class BaseWindow extends BorderPane implements javafx.fxml.Initializable 
 			register(2, "QueueSystem", new QueueLauncher());
 			register(3, "PointSystem", new PointLauncher());
 			register(4, "CommandSystem", new CommandLauncher());
+			//register(5, "YoutubeSystem", new YoutubeLauncher());
 			for(int i = 5; i <= 8; i++)
 				register(i, "", null);
 		}
@@ -120,8 +124,13 @@ public class BaseWindow extends BorderPane implements javafx.fxml.Initializable 
 		else
 		{
 			numberToCheckBox(index).setText(name);
-			numberToCheckBox(index).setSelected(MyBot.instance.getAddon(name).enabled());
+			Addon addon;
+			if((addon = MyBot.instance.getAddon(name)) == null)
+				numberToCheckBox(index).setVisible(false);
+			else
+				numberToCheckBox(index).setSelected(MyBot.instance.getAddon(name).enabled());
 			launcherMap.put(index, launcher);
+			addonMap.put(index, addon);
 		}
 	}
 	private Integer buttonToNumber(Button b)
@@ -230,7 +239,7 @@ public class BaseWindow extends BorderPane implements javafx.fxml.Initializable 
 	private void updateViewers(long iteration)
 	{
 		int nViewers = MyBot.instance.getUsers().length;
-		seriesViewers.getData().add(new XYChart.Data<String, Number>(iteration+"", nViewers));
+		seriesViewers.getData().add(new XYChart.Data<String, Number>(currentTime(), nViewers));
 		if(chrtViewers.getData().size() == 0)
 			chrtViewers.getData().add(seriesViewers);
 		
@@ -239,8 +248,13 @@ public class BaseWindow extends BorderPane implements javafx.fxml.Initializable 
 	private void updateMessages(long iteration)
 	{
 		int nMessages = MyBot.instance.getResetMessages();
-		seriesMessages.getData().add(new XYChart.Data<String, Number>(iteration+"", nMessages));
+		seriesMessages.getData().add(new XYChart.Data<String, Number>(currentTime(), nMessages));
 		if(chrtMessages.getData().size() == 0)
 			chrtMessages.getData().add(seriesMessages);
+	}
+	private String currentTime()
+	{
+		String timeStamp = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
+		return timeStamp;
 	}
 }

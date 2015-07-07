@@ -4,7 +4,7 @@ import helpers.FileManager;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -126,8 +126,8 @@ public class SetupWindow extends BorderPane implements javafx.fxml.Initializable
 			}
 			else
 			{
-				HashMap map = new HashMap<String, HashMap<String, String>>();
-				HashMap map2 = new HashMap<String, String>();
+				TreeMap map = new TreeMap<String, TreeMap<String, String>>();
+				TreeMap map2 = new TreeMap<String, String>();
 				map2.put("ChannelOwner", channelOwner);
 				map2.put("BotOperator", botOperator);
 				map2.put("BotName", botName);

@@ -36,12 +36,12 @@
                            <children>
                               <BorderPane prefHeight="313.0" prefWidth="675.0">
                                  <center>
-                                    <TableView fx:id="tblMain" editable="true" prefHeight="282.0" prefWidth="659.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+                                    <TableView fx:id="tblMain" editable="true" prefHeight="265.0" prefWidth="503.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
                                       <columns>
                                         <TableColumn fx:id="colMainIsRegex" editable="false" prefWidth="63.0" text="Is Regex" />
                                         <TableColumn fx:id="colMainKey" editable="false" prefWidth="168.0" text="Key (Command)" />
                                           <TableColumn fx:id="colMainMessage" prefWidth="346.0" text="Message" />
-                                          <TableColumn fx:id="colMainAccessibility" minWidth="0.0" prefWidth="98.0" text="Accessibility" />
+                                          <TableColumn fx:id="colMainAccessibility" minWidth="0.0" prefWidth="92.0" text="Accessibility" />
                                       </columns>
                                     </TableView>
                                  </center>
@@ -49,20 +49,6 @@
                                     <Button mnemonicParsing="false" onAction="#removeCommand" prefHeight="33.0" prefWidth="664.0" text="Remove Current Selected Command" BorderPane.alignment="CENTER" />
                                  </bottom>
                               </BorderPane>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Visualization">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #EEEEEE;">
-                           <children>
-                              <Label alignment="CENTER" layoutY="298.0" prefHeight="33.0" prefWidth="442.0" text="Commands by Use" textAlignment="CENTER" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0">
-                                 <font>
-                                    <Font name="Seravek ExtraLight" size="27.0" />
-                                 </font>
-                              </Label>
-                              <PieChart fx:id="chtVisualization" layoutX="1.0" prefHeight="185.0" prefWidth="675.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                   </content>

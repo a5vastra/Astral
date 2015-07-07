@@ -4,7 +4,7 @@ import helpers.FileManager;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -21,7 +21,10 @@ public class PointSystem extends Addon{
 		this.addTimer(MyTasks.AutomaticPoints.name(), 0, 60);
 		Load();
 		Save();
+		_pointName = this.nullCoalescingSetting("pointName", "point");
 	}
+	private String _pointName;
+	public String pointName(){ return _pointName; }
 	@Override
 	public void Load()
 	{
@@ -40,7 +43,7 @@ public class PointSystem extends Addon{
 		FileManager fm = new FileManager(getName());
 		{
 			map.put(MyInformation.Settings.name(), settings);
-			HashMap<String, String> pointAccountsHash = new HashMap<String, String>();
+			TreeMap<String, String> pointAccountsHash = new TreeMap<String, String>();
 			for(PointAccount pa : pointAccounts)
 			{
 				pointAccountsHash.put(pa.name, pa.points+"");
@@ -78,6 +81,7 @@ public class PointSystem extends Addon{
 		boolean changed = false;
 		Pattern p;
 		Matcher m;
+		message = message.replace("point", pointName());
 		if(MyBot.isOwner(sender))
 		{
 			p = getOrRegisterPattern("pointAward", "^!pointaward (?<name>\\w+) (?<points>\\d+)$");
@@ -86,6 +90,15 @@ public class PointSystem extends Addon{
 			{
 				if(attemptToEditPoints(m.group("name"), Integer.parseInt(m.group("points"))))
 					msg(sender+" awards "+m.group("points")+" points to "+m.group("name")+".");
+				changed = true;
+			}
+			
+			p = getOrRegisterPattern("pointRemove", "^!pointremove (?<name>\\w+) (?<points>\\d+)$");
+			m = p.matcher(message);
+			if(find(m))
+			{
+				if(attemptToEditPoints(m.group("name"), -Integer.parseInt(m.group("points"))))
+					msg(sender+" removes "+m.group("points")+" points from "+m.group("name")+".");
 				changed = true;
 			}
 			
@@ -126,24 +139,25 @@ public class PointSystem extends Addon{
 			m = p.matcher(message);
 			if(find(m))
 			{
-				HashMap<String,String> settings = mapGet(MyInformation.Settings.name());
+				TreeMap<String,String> settings = mapGet(MyInformation.Settings.name());
 				settings.put(m.group("settingName"), m.group("settingInfo"));
 				map.put(MyInformation.Settings.name(), settings);
 				msg("Change to "+m.group("settingName")+" confirmed.");
+				_pointName = this.nullCoalescingSetting("pointName", "point");
 				changed = true;
 			}
 			
 			String pointSettingsInteger = "("
 					+ "minimumMessagesRequired|"
 					+ "minimumMinutesRequired|"
-					+ "pointReward"
+					+ "pointReward|"
 					+ "followerRewardMultiplier"
 					+ ")";
 			p = getOrRegisterPattern("pointSettingsInteger", "^!pointsetting (?<settingName>"+pointSettingsInteger+") (?<settingInfo>\\d+)$");
 			m = p.matcher(message);
 			if(find(m))
 			{
-				HashMap<String,String> settings = mapGet(MyInformation.Settings.name());
+				TreeMap<String,String> settings = mapGet(MyInformation.Settings.name());
 				settings.put(m.group("settingName"), m.group("settingInfo"));
 				map.put(MyInformation.Settings.name(), settings);
 				msg("Change to "+m.group("settingName")+" confirmed.");
@@ -256,10 +270,6 @@ public class PointSystem extends Addon{
 	protected int minimumMessagesElapsed(){return Integer.parseInt(nullCoalescingSetting("minimumMessagesElapsed","5"));}
 	protected int pointReward(){return Integer.parseInt(nullCoalescingSetting("pointReward","0"));}
 	protected int followerRewardMultiplier(){return Integer.parseInt(nullCoalescingSetting("followerRewardMultiplier","100"));}
-	protected String nullCoalescingSetting(String s, String def){
-		s = settings.get(s);
-		return s == null?def:s;
-	}
 	public class PointAccount
 	{
 		String name;
@@ -306,7 +316,7 @@ public class PointSystem extends Addon{
 			if(result)
 				points += toAdd;
 			else
-				msg(name+", you don't have enough <points> to do that.");
+				msg(name+", you don't have enough points to do that.");
 			return result;
 		}
 	}

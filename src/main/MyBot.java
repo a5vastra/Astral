@@ -1,6 +1,6 @@
 package main;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.List;
 
 import org.jibble.pircbot.PircBot;
@@ -8,6 +8,7 @@ import org.jibble.pircbot.User;
 
 import test.ChatWindow;
 import addons.Addon;
+import addons.ChatExtrasSystem;
 import addons.ChatSystem;
 import addons.CommandSystem;
 import addons.PointSystem;
@@ -16,12 +17,13 @@ import addons.QueueSystem;
 
 public class MyBot extends PircBot{
 	public static MyBot instance;
-	private HashMap<String, Addon> addonHash = new HashMap<String, Addon>();
-	private static String ownerName; private static String botName;
-	 public MyBot(String _ownerName, String _botName)
+	private TreeMap<String, Addon> addonHash = new TreeMap<String, Addon>();
+	private static String ownerName; private static String botName; private static String botOperator;
+	 public MyBot(String _ownerName, String _botName, String _botOperator)
 	 {
 		 ownerName = _ownerName;
 		 botName = _botName;
+		 botOperator = _botOperator;
 		 this.setLogin(botName);
 		 this.setName(botName);
 		 this.setMessageDelay(0);
@@ -30,6 +32,7 @@ public class MyBot extends PircBot{
 		 hash(new CommandSystem());
 		 hash(new ChatSystem());
 		 hash(new QueueSystem());
+		 hash(new ChatExtrasSystem());
 		 directMessage("hello world");
 	 }
 	 private boolean messageFound = false;
@@ -86,7 +89,7 @@ public class MyBot extends PircBot{
 	 }
 	 public static boolean isOwner(String user)
 	 {
-		 return user == ownerName || user == botName;
+		 return user.equalsIgnoreCase(ownerName) || user.equalsIgnoreCase(botName) || user.equalsIgnoreCase(botOperator);
 	 }
 	 public static boolean isMod(String user)
 	 {
@@ -99,15 +102,9 @@ public class MyBot extends PircBot{
 	 public static void message(String msg)
 	 {
 		 if(instance == null) return;
-		 //Try sending a command. If nothing uses it, then send it as a message.
-		 /*if(!instance.onMessage(botName, msg))
-		 {
-			 instance.sendMessage("#"+ownerName, msg);
-		 }
-		 else
-		 {
-			 instance.getAddon("ChatSystem").onMsg(botName, msg);
-		 }*/
+		 
+		 msg = ((ChatExtrasSystem)instance.getAddon("ChatExtrasSystem")).attemptToModify(msg);
+		 
 		 instance.sendMessage("#"+ownerName, msg);
 		 instance.onMessage(botName, msg);
 	 }

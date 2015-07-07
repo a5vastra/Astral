@@ -1,7 +1,7 @@
 package addons;
 import helpers.MiniTimer;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,10 +12,10 @@ public abstract class Addon {
 	protected String myName;
 	public String getName(){ return myName; }
 	private boolean enabled = true;
-	private HashMap<String, Pattern> patterns = new HashMap<String, Pattern>();
-	protected HashMap<String, HashMap<String, String>> map = new HashMap<String, HashMap<String, String>>();
-	private HashMap<String, MiniTimer> timers = new HashMap<String, MiniTimer>();
-	protected HashMap<String, String> settings = new HashMap<String, String>();
+	private TreeMap<String, Pattern> patterns = new TreeMap<String, Pattern>();
+	protected TreeMap<String, TreeMap<String, String>> map = new TreeMap<String, TreeMap<String, String>>();
+	private TreeMap<String, MiniTimer> timers = new TreeMap<String, MiniTimer>();
+	protected TreeMap<String, String> settings = new TreeMap<String, String>();
 	public Addon()
 	{
 		
@@ -95,6 +95,7 @@ public abstract class Addon {
 	{
 		if(!patterns.containsKey(name))
 			patterns.put(name, Pattern.compile(regex, Pattern.CASE_INSENSITIVE));
+		//System.out.println(name+"\n\t"+regex);
 		return patterns.get(name);
 	}
 	public void addTimer(String key, long delay, long period)
@@ -120,14 +121,18 @@ public abstract class Addon {
 	{
 		
 	}
-	public HashMap<String, String> getSettings()
+	public TreeMap<String, String> getSettings()
 	{
 		return mapGet("Settings");
 	}
-	public HashMap<String, String> mapGet(String name)
+	public TreeMap<String, String> mapGet(String name)
 	{
 		if(!map.containsKey(name))
-			map.put(name, new HashMap<String, String>());
+			map.put(name, new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER));
 		return map.get(name);
+	}
+	protected String nullCoalescingSetting(String s, String def){
+		s = settings.get(s);
+		return s == null?def:s;
 	}
 }

@@ -3,9 +3,10 @@ package addons;
 import helpers.FileManager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -44,7 +45,7 @@ public class CommandSystem extends Addon{
 	{
 		FileManager fm = new FileManager(getName());
 		{
-			HashMap<String, String> commandsHash = new HashMap<String, String>();
+			TreeMap<String, String> commandsHash = new TreeMap<String, String>();
 			int i = 0;
 			for(Command c : commands)
 			{

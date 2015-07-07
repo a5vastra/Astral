@@ -181,6 +181,9 @@ public class CommandWindow extends BorderPane implements javafx.fxml.Initializab
 		if(tblMain.getSelectionModel() != null)
 		{
 			_Command c = (_Command)tblMain.getSelectionModel().getSelectedItem();
+			if(c==null)
+				return;
+			
 			MyBot.message(String.format("!commandremove %s", c.key.get()));
 		}
 				
