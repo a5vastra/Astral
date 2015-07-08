@@ -4,7 +4,7 @@ import helpers.MiniTimer;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -31,8 +31,8 @@ import javafx.application.Application;
 
 public class BaseWindow extends BorderPane implements javafx.fxml.Initializable {
 	private static BaseWindow instance;
-	private TreeMap<Integer, ApplicationLauncher> launcherMap = new TreeMap<Integer, ApplicationLauncher>();
-	private TreeMap<Integer, Addon> addonMap = new TreeMap<Integer, Addon>();
+	private HashMap<Integer, ApplicationLauncher> launcherMap = new HashMap<Integer, ApplicationLauncher>();
+	private HashMap<Integer, Addon> addonMap = new HashMap<Integer, Addon>();
 	private long counter = 0;
 	public BaseWindow()
 	{

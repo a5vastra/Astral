@@ -5,6 +5,8 @@
     <a5vbot>0</a5vbot>
   </Points>
   <Settings>
+    <minimummessagesrequired>1</minimummessagesrequired>
+    <minimumminutesrequired>1</minimumminutesrequired>
     <pointName>cookie</pointName>
   </Settings>
 </PointSystem>

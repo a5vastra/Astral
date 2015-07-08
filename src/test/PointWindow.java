@@ -1,7 +1,7 @@
 package test;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
@@ -133,7 +133,7 @@ public class PointWindow extends BorderPane implements javafx.fxml.Initializable
 		public void setValue(String val){value.set(val);}
 	}
 	
-	private void settings(TreeMap<String, String> map)
+	private void settings(HashMap<String, String> map)
 	{
 		if(map == null || map.isEmpty())
 			return;

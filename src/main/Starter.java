@@ -5,7 +5,7 @@ import helpers.FileManager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.Map.Entry;
 
 import test.BaseLauncher;
@@ -32,8 +32,8 @@ public class Starter {
 	        	String oauth = null;
 	        	String botOperator = "";
 	        	FileManager fm = new FileManager("Settings");
-	        	TreeMap<String, TreeMap<String, String>> map = fm.Load("Settings");
-	        	for(Entry<String, TreeMap<String, String>> e : map.entrySet())
+	        	HashMap<String, HashMap<String, String>> map = fm.Load("Settings");
+	        	for(Entry<String, HashMap<String, String>> e : map.entrySet())
 	        	{
 	        		for(Entry<String, String> e2 : e.getValue().entrySet())
 	        		{

@@ -4,7 +4,7 @@ import helpers.FileManager;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -33,7 +33,8 @@ public class PointSystem extends Addon{
 		settings = mapGet(MyInformation.Settings.name());
 		for(Entry<String, String> ePointAccount : mapGet(MyInformation.Points.name()).entrySet())
 		{
-			PointAccount pa = new PointAccount(ePointAccount.getKey(), Integer.parseInt(ePointAccount.getValue()));
+			String key = ePointAccount.getKey();
+			PointAccount pa = new PointAccount(key, Integer.parseInt(ePointAccount.getValue()));
 			pointAccounts.add(pa);
 		}
 	}
@@ -43,7 +44,7 @@ public class PointSystem extends Addon{
 		FileManager fm = new FileManager(getName());
 		{
 			map.put(MyInformation.Settings.name(), settings);
-			TreeMap<String, String> pointAccountsHash = new TreeMap<String, String>();
+			HashMap<String, String> pointAccountsHash = new HashMap<String, String>();
 			for(PointAccount pa : pointAccounts)
 			{
 				pointAccountsHash.put(pa.name, pa.points+"");
@@ -59,6 +60,7 @@ public class PointSystem extends Addon{
 		if((pa = findPointAccount(user)) != null)
 		{
 			pa.present = true;
+			System.out.println("hello "+pa.name);
 		}
 		else
 		{
@@ -78,10 +80,12 @@ public class PointSystem extends Addon{
 	@Override
 	public void onMsg(String sender, String message)
 	{
+		onJoin(sender);
+		
 		boolean changed = false;
 		Pattern p;
 		Matcher m;
-		message = message.replace("point", pointName());
+		message = message.replace(pointName(), "point");
 		if(MyBot.isOwner(sender))
 		{
 			p = getOrRegisterPattern("pointAward", "^!pointaward (?<name>\\w+) (?<points>\\d+)$");
@@ -139,10 +143,11 @@ public class PointSystem extends Addon{
 			m = p.matcher(message);
 			if(find(m))
 			{
-				TreeMap<String,String> settings = mapGet(MyInformation.Settings.name());
-				settings.put(m.group("settingName"), m.group("settingInfo"));
+				HashMap<String,String> settings = mapGet(MyInformation.Settings.name());
+				String key = MySettings.attemptToMatch(m.group("settingName"));
+				settings.put(key, m.group("settingInfo"));
 				map.put(MyInformation.Settings.name(), settings);
-				msg("Change to "+m.group("settingName")+" confirmed.");
+				msg("Change to "+key+" confirmed.");
 				_pointName = this.nullCoalescingSetting("pointName", "point");
 				changed = true;
 			}
@@ -157,10 +162,11 @@ public class PointSystem extends Addon{
 			m = p.matcher(message);
 			if(find(m))
 			{
-				TreeMap<String,String> settings = mapGet(MyInformation.Settings.name());
-				settings.put(m.group("settingName"), m.group("settingInfo"));
+				HashMap<String,String> settings = mapGet(MyInformation.Settings.name());
+				String key = MySettings.attemptToMatch(m.group("settingName"));
+				settings.put(key, m.group("settingInfo"));
 				map.put(MyInformation.Settings.name(), settings);
-				msg("Change to "+m.group("settingName")+" confirmed.");
+				msg("Change to "+key+" confirmed.");
 				changed = true;
 			}
 		}
@@ -266,10 +272,10 @@ public class PointSystem extends Addon{
 	{
 		msg("!pointsetting "+name+" "+value);
 	}
-	protected int minimumMinutesElapsed(){return Integer.parseInt(nullCoalescingSetting("minimumMinutesElapsed","5"));}
-	protected int minimumMessagesElapsed(){return Integer.parseInt(nullCoalescingSetting("minimumMessagesElapsed","5"));}
-	protected int pointReward(){return Integer.parseInt(nullCoalescingSetting("pointReward","0"));}
-	protected int followerRewardMultiplier(){return Integer.parseInt(nullCoalescingSetting("followerRewardMultiplier","100"));}
+	protected int minimumMinutesElapsed(){return Integer.parseInt(nullCoalescingSetting(MySettings.minimumMinutesRequired.name(),"5"));}
+	protected int minimumMessagesElapsed(){return Integer.parseInt(nullCoalescingSetting(MySettings.minimumMessagesRequired.name(),"5"));}
+	protected int pointReward(){return Integer.parseInt(nullCoalescingSetting(MySettings.pointReward.name(),"0"));}
+	protected int followerRewardMultiplier(){return Integer.parseInt(nullCoalescingSetting(MySettings.followerRewardMultiplier.name(),"100"));}
 	public class PointAccount
 	{
 		String name;
@@ -349,5 +355,22 @@ public class PointSystem extends Addon{
 	enum MyInformation
 	{
 		Settings, Points
+	}
+	enum MySettings
+	{
+		pointName, minimumMessagesRequired, minimumMinutesRequired, pointReward, followerRewardMultiplier;
+		boolean match(String toMatch)
+		{
+			return this.name().equalsIgnoreCase(toMatch);
+		}
+		static String attemptToMatch(String toMatch)
+		{
+			for(MySettings ms : MySettings.values())
+			{
+				if(ms.match(toMatch))
+					return ms.name();
+			}
+			return "";
+		}
 	}
 }

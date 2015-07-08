@@ -8,7 +8,7 @@ import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -37,10 +37,10 @@ public class FileManager {
 	{
 		this.name = name;
 	}
-	public TreeMap<String, TreeMap<String, String>> Load(String className)
+	public HashMap<String, HashMap<String, String>> Load(String className)
 	{
 		try {
-			TreeMap<String, TreeMap<String, String>> map = new TreeMap<String, TreeMap<String, String>>();
+			HashMap<String, HashMap<String, String>> map = new HashMap<String, HashMap<String, String>>();
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder;
 			dBuilder = dbFactory.newDocumentBuilder();
@@ -48,7 +48,7 @@ public class FileManager {
 			if(!file.exists())
 			{
 				//file.createNewFile();
-				return new TreeMap<String, TreeMap<String, String>>();
+				return new HashMap<String, HashMap<String, String>>();
 			}
 			else
 			{
@@ -87,7 +87,7 @@ public class FileManager {
 					{
 						//System.out.println(outerNode.getNodeName());
 						NodeList innerNodeList = outerNode.getChildNodes();
-						TreeMap<String, String> innerMap = new TreeMap<String, String>();
+						HashMap<String, String> innerMap = new HashMap<String, String>();
 						for(int j = 0; j < innerNodeList.getLength(); j++)
 						{
 							Node innerNode = innerNodeList.item(j);
@@ -108,11 +108,11 @@ public class FileManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (Exception e) {
-			return new TreeMap<String, TreeMap<String, String>>();
+			return new HashMap<String, HashMap<String, String>>();
 		}
 		return null;
 	}
-	public void Create(String className, TreeMap<String, TreeMap<String, String>> map)
+	public void Create(String className, HashMap<String, HashMap<String, String>> map)
 	{
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -124,7 +124,7 @@ public class FileManager {
 			doc.appendChild(rootElement);
 			
 			// staff elements
-			for(Entry<String, TreeMap<String, String>> outer : map.entrySet())
+			for(Entry<String, HashMap<String, String>> outer : map.entrySet())
 			{
 				//System.out.println(outer.getKey());
 				Element eOuter = doc.createElement(outer.getKey());

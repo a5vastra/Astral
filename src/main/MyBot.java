@@ -1,6 +1,6 @@
 package main;
 import java.util.ArrayList;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.List;
 
 import org.jibble.pircbot.PircBot;
@@ -17,7 +17,7 @@ import addons.QueueSystem;
 
 public class MyBot extends PircBot{
 	public static MyBot instance;
-	private TreeMap<String, Addon> addonHash = new TreeMap<String, Addon>();
+	private HashMap<String, Addon> addonHash = new HashMap<String, Addon>();
 	private static String ownerName; private static String botName; private static String botOperator;
 	 public MyBot(String _ownerName, String _botName, String _botOperator)
 	 {

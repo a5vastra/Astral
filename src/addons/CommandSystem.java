@@ -3,7 +3,7 @@ package addons;
 import helpers.FileManager;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -45,7 +45,7 @@ public class CommandSystem extends Addon{
 	{
 		FileManager fm = new FileManager(getName());
 		{
-			TreeMap<String, String> commandsHash = new TreeMap<String, String>();
+			HashMap<String, String> commandsHash = new HashMap<String, String>();
 			int i = 0;
 			for(Command c : commands)
 			{
