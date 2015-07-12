@@ -21,7 +21,8 @@ public class ChatExtrasSystem extends Addon{
 			flag = 0;
 			msg = random(msg);
 			msg = customPointName(msg);
-			if(flag > 25)
+			breakUpIntoNewLines(msg);
+			if(flag > 10)
 			{
 				return "";
 			}
@@ -48,5 +49,14 @@ public class ChatExtrasSystem extends Addon{
 	{
 		String myName = ((PointSystem)MyBot.instance.getAddon("PointSystem")).pointName();
 		return msg.replace("point", myName);
+	}
+	void breakUpIntoNewLines(String msg)
+	{
+		if(msg.contains("$n"))
+		{
+			for(String s : msg.split("\\$n"))
+				MyBot.instance.message(s);
+			flag += 100;
+		}
 	}
 }

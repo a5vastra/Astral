@@ -26,7 +26,7 @@ public class MyBot extends PircBot{
 		 botOperator = _botOperator;
 		 this.setLogin(botName);
 		 this.setName(botName);
-		 this.setMessageDelay(0);
+		 this.setMessageDelay(1);
 		 instance = this;
 		 hash(new PointSystem());
 		 hash(new CommandSystem());

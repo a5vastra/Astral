@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CommandSystem>
+  <Commands>
+    <_0>&lt;command='!hey'/&gt; &lt;message='hi'/&gt; &lt;accessibility='all'/&gt; </_0>
+    <_1>&lt;command='!hey2'/&gt; &lt;message='hi2'/&gt; &lt;accessibility='all'/&gt; </_1>
+  </Commands>
+</CommandSystem>

@@ -118,7 +118,7 @@ public class CommandSystem extends Addon{
 		{
 			if(c.isMatch(sender, message))
 			{
-				msg(c.message);
+				msg(c.message.replace("$u", sender));
 			}
 		}
 		if(changeMade)
@@ -136,7 +136,7 @@ public class CommandSystem extends Addon{
 		public boolean isRegex(){ return !regex.equals(""); }
 		public String getMessage(){ return message; }
 		public String getAccessibility(){ return accessibility; }
-		protected Command(String input)
+		public Command(String input)
 		{
 			Pattern p;
 			Matcher m;
@@ -175,7 +175,8 @@ public class CommandSystem extends Addon{
 		}
 		protected boolean isValid()
 		{
-			return (!command.equals("") || !regex.equals("")) && (!message.equals(""));
+			boolean selfMatching = checkCommandRegexForMatch(message);
+			return !selfMatching && (!command.equals("") || !regex.equals("")) && (!message.equals(""));
 		}
 		Pattern pattern;
 		protected boolean isMatch(String sender, String matchTo)
@@ -195,6 +196,10 @@ public class CommandSystem extends Addon{
 					return false;
 				break;
 			}
+			return (checkCommandRegexForMatch(matchTo));
+		}
+		public boolean checkCommandRegexForMatch(String matchTo)
+		{
 			if(command != "")
 			{
 				return check(command.equalsIgnoreCase(matchTo));
@@ -203,9 +208,10 @@ public class CommandSystem extends Addon{
 			{
 				Matcher m = pattern.matcher(matchTo);
 				return find(m);
-			}
+			}		
 			return false;
 		}
+		 
 		public String getCommandOrRegex()
 		{
 			if(isValid())

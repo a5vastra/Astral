@@ -60,7 +60,7 @@ public class PointSystem extends Addon{
 		if((pa = findPointAccount(user)) != null)
 		{
 			pa.present = true;
-			System.out.println("hello "+pa.name);
+			//System.out.println("hello "+pa.name);
 		}
 		else
 		{
