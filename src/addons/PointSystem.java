@@ -188,7 +188,7 @@ public class PointSystem extends Addon{
 			}
 		}
 		
-		p = getOrRegisterPattern("pointCheck", "^!pointcheck(| (?<toCheck>\\w+))$");
+		p = getOrRegisterPattern("pointCheck", "^!point(check|)(| (?<toCheck>\\w+))$");
 		m = p.matcher(message);
 		if(find(m))
 		{
