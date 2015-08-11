@@ -12,9 +12,12 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 public class SetupLauncher extends ApplicationLauncher {
+	private static Stage stage;
+	public static Stage getSetupWindowStage(){ return stage; }
 	@Override
 	public void start(Stage primaryStage) {
 		Parent root;
+		stage = primaryStage;
 		try {
 			FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("SetupWindow.fxml"));
 			root = fxmlloader.load();

@@ -1,13 +1,18 @@
 package test;
 import helpers.FileManager;
+import helpers.OldPointConversion;
 
 import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import addons.QueueSystem;
 import main.MyBot;
@@ -34,6 +39,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
 public class SetupWindow extends BorderPane implements javafx.fxml.Initializable {
@@ -160,5 +166,22 @@ public class SetupWindow extends BorderPane implements javafx.fxml.Initializable
 		    Desktop.getDesktop().browse(new URL(url).toURI());
 		} catch (Exception ex) {ex.printStackTrace();}
 	}
-	
+	@FXML private void ImportPreviousSettings()
+	{
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File");
+		File f = fileChooser.showOpenDialog(SetupLauncher.getSetupWindowStage());
+		if(f.exists())
+		{
+			if(f.getName().endsWith(".points"))
+			{
+				try {
+					OldPointConversion.Convert(f.getAbsolutePath());
+				} catch (Exception e)
+				{
+					
+				}
+			}
+		}
+	}
 }

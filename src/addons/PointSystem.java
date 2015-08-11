@@ -222,6 +222,10 @@ public class PointSystem extends Addon{
 			Save();
 		}
 	}
+	public void setPointAccounts(List<PointAccount> pas)
+	{
+		pointAccounts = pas;
+	}
 	@Override
 	public void doneWithTime(String key)
 	{
@@ -327,6 +331,21 @@ public class PointSystem extends Addon{
 		}
 	}
 	
+	public void combinePointsInternally(List<PointAccount> list)
+	{
+		for (PointAccount e : list) {
+			for(PointAccount pa : pointAccounts)
+			{
+				if(pa.name == e.name)
+				{
+					pa.addPoints(e.points);
+					break;
+				}
+			}
+			//if there is no matches, then just add this directly.
+			pointAccounts.add(e);
+		}
+	}
 	
 	public List<PointAccount> getTopRanked(int num)
 	{

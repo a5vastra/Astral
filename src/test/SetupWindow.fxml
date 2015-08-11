@@ -178,11 +178,16 @@
             </SplitPane>
             <AnchorPane fx:id="P6" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TextArea fx:id="finalPage" editable="false" prefHeight="344.0" prefWidth="600.0" text="Okay, you're done setting up!&#10;&#10;I hope that wasn't so hard.&#10;&#10;&#10;" wrapText="true">
+                  <TextArea fx:id="finalPage" editable="false" prefHeight="344.0" prefWidth="600.0" text="Okay, you're done setting up!&#10;&#10;I hope that wasn't so hard.&#10;&#10;If you previously used the old version of the bot&#10;and you wish to import your previous settings,&#10;&#10;Click the import button, and navigate to your old .point file.&#10;&#10;&#10;" wrapText="true">
                      <font>
                         <Font name="Seravek ExtraLight" size="20.0" />
                      </font>
                   </TextArea>
+                  <Button defaultButton="true" layoutX="429.0" layoutY="236.0" mnemonicParsing="false" onAction="#ImportPreviousSettings" prefHeight="95.0" prefWidth="159.0" text="Import Previous Point Settings" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Seravek ExtraLight" size="16.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </children>

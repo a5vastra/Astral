@@ -162,7 +162,7 @@ public class CommandWindow extends BorderPane implements javafx.fxml.Initializab
 		try
 		{
 			Pattern.compile(regex);
-			Command c = ((CommandSystem)MyBot.instance.getAddon("CommandSystem")).new Command("<regex='regex'/> <message=''/>");
+			Command c = ((CommandSystem)MyBot.instance.getAddon("CommandSystem")).new Command("<regex='"+regex+"'/> <message='"+message+"'/>");
 			if(!c.checkCommandRegexForMatch(regex))
 				throw new Exception();
 		}
