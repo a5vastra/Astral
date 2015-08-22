@@ -12,7 +12,7 @@ import main.MyBot;
 public class QueueSystem extends Addon {
 	public QueueSystem()
 	{
-		myName = "QueueSystem";
+		myName = ADDONS.Queue;
 	}
 	private ArrayList<String> queue = new ArrayList<String>();
 	private List<QueueAccount> list = new ArrayList<QueueAccount>();

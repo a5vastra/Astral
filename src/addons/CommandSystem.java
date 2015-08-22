@@ -19,7 +19,7 @@ public class CommandSystem extends Addon{
 	public List<Command> getCommands(){return new ArrayList<Command>(commands);}
 	public CommandSystem()
 	{
-		myName = "CommandSystem";
+		myName = ADDONS.Command;
 		Load();
 		//commands.add(new Command(""));
 		//commands.add(new Command("<command='!test1'/><message='this is a test'/>"));
@@ -29,8 +29,8 @@ public class CommandSystem extends Addon{
 	@Override
 	public void Load()
 	{
-		FileManager fm = new FileManager(getName());
-		map = fm.Load(getName());
+		FileManager fm = new FileManager(getSystemName());
+		map = fm.Load(getSystemName());
 		settings = mapGet(MyInformation.Commands.name());
 		{
 			for(Entry<String, String> e : mapGet(MyInformation.Commands.name()).entrySet())
@@ -43,7 +43,7 @@ public class CommandSystem extends Addon{
 	@Override
 	public void Save()
 	{
-		FileManager fm = new FileManager(getName());
+		FileManager fm = new FileManager(getSystemName());
 		{
 			HashMap<String, String> commandsHash = new HashMap<String, String>();
 			int i = 0;
@@ -53,11 +53,14 @@ public class CommandSystem extends Addon{
 			}
 			map.put(MyInformation.Commands.name(), commandsHash);
 		}
-		fm.Create(getName(), map);
+		fm.Create(getSystemName(), map);
 	}
 	@Override
 	public void onMsg(String sender, String message)
 	{
+		if(MyBot.isBot(sender))
+			return;
+		
 		boolean changeMade = false;
 		if(MyBot.isOwner(sender))
 		{
@@ -118,7 +121,33 @@ public class CommandSystem extends Addon{
 		{
 			if(c.isMatch(sender, message))
 			{
-				msg(c.message.replace("$u", sender));
+				String out = c.message.replace("$u", sender);
+				if(c.isRegex())
+				{
+					Matcher m2;
+					m2 = c.pattern.matcher(message);
+					if(!m2.find())
+						continue;
+					
+					for(int i = 0; i < 10; i++)
+					{
+						try
+						{
+							if(c.pattern.pattern().contains("?<g"+i+">"))
+							{	
+								if(m2.group("g"+i) != null)
+								{
+									out = out.replace("$g"+i ,m2.group("g"+i));
+								}							
+							}
+						}
+						catch(Exception e)
+						{
+							continue;
+						}
+					}
+				}
+				msg(out);
 			}
 		}
 		if(changeMade)
@@ -140,19 +169,19 @@ public class CommandSystem extends Addon{
 		{
 			Pattern p;
 			Matcher m;
-			p = Pattern.compile("<command='(?<command>.+?)'/>");
+			p = Pattern.compile("<command='(?<command>.+?|)'/>");
 			m = p.matcher(input);
 			if(m.find())
 			{
 				command = m.group("command");
 			}
-			p = Pattern.compile("<message='(?<message>.+?)'/>");
+			p = Pattern.compile("<message='(?<message>.+?|)'/>");
 			m = p.matcher(input);
 			if(m.find())
 			{
 				message = m.group("message");
 			}
-			p = Pattern.compile("<regex='(?<regex>.+?)'/>");
+			p = Pattern.compile("<regex='(?<regex>.+?|)'/>");
 			m = p.matcher(input);
 			if(m.find())
 			{
@@ -166,7 +195,7 @@ public class CommandSystem extends Addon{
 					error("Invalid regex attempt: '"+regex+"'");
 				}
 			}
-			p = Pattern.compile("<accessibility='(?<accessibility>all|mod|admin)'/>");
+			p = Pattern.compile("<accessibility='(?<accessibility>all|mod|admin|)'/>");
 			m = p.matcher(input);
 			if(m.find())
 			{

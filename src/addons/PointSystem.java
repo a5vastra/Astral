@@ -17,7 +17,7 @@ public class PointSystem extends Addon{
 	List<PointAccount> pointAccounts = new ArrayList<PointAccount>();
 	public PointSystem()
 	{
-		myName = "PointSystem";
+		myName = ADDONS.Point;
 		this.addTimer(MyTasks.AutomaticPoints.name(), 0, 60);
 		Load();
 		Save();
@@ -28,12 +28,14 @@ public class PointSystem extends Addon{
 	@Override
 	public void Load()
 	{
-		FileManager fm = new FileManager(getName());
-		map = fm.Load(getName());
+		FileManager fm = new FileManager(getSystemName());
+		map = fm.Load(getSystemName());
 		settings = mapGet(MyInformation.Settings.name());
 		for(Entry<String, String> ePointAccount : mapGet(MyInformation.Points.name()).entrySet())
 		{
 			String key = ePointAccount.getKey();
+			if(key.startsWith("_"))
+				key = key.substring(1);
 			PointAccount pa = new PointAccount(key, Integer.parseInt(ePointAccount.getValue()));
 			pointAccounts.add(pa);
 		}
@@ -41,17 +43,17 @@ public class PointSystem extends Addon{
 	@Override
 	public void Save()
 	{
-		FileManager fm = new FileManager(getName());
+		FileManager fm = new FileManager(getSystemName());
 		{
 			map.put(MyInformation.Settings.name(), settings);
 			HashMap<String, String> pointAccountsHash = new HashMap<String, String>();
 			for(PointAccount pa : pointAccounts)
 			{
-				pointAccountsHash.put(pa.name, pa.points+"");
+				pointAccountsHash.put("_"+pa.name, pa.points+"");
 			}
 			map.put(MyInformation.Points.name(), pointAccountsHash);
 		}
-		fm.Create(getName(), map);
+		fm.Create(getSystemName(), map);
 	}
 	@Override
 	public void onJoin(String user)

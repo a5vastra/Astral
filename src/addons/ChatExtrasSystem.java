@@ -10,7 +10,7 @@ public class ChatExtrasSystem extends Addon{
 	int flag = 0;
 	public ChatExtrasSystem()
 	{
-		myName = "ChatExtrasSystem";
+		myName = ADDONS.ChatExtra;
 	}
 	public String attemptToModify(String msg)
 	{
@@ -47,7 +47,7 @@ public class ChatExtrasSystem extends Addon{
 	}
 	String customPointName(String msg)
 	{
-		String myName = ((PointSystem)MyBot.instance.getAddon("PointSystem")).pointName();
+		String myName = ((PointSystem)MyBot.instance.getAddon(ADDONS.Point)).pointName();
 		return msg.replace("point", myName);
 	}
 	void breakUpIntoNewLines(String msg)

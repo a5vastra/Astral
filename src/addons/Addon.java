@@ -9,8 +9,10 @@ import main.MyBot;
 
 
 public abstract class Addon {
-	protected String myName;
-	public String getName(){ return myName; }
+	public enum ADDONS{ChatExtra,Chat,Command,Greeter,Point,Queue,none}
+	protected ADDONS myName;
+	public ADDONS getName(){ return myName; }
+	public String getSystemName(){ return myName.name()+"System";}
 	private boolean enabled = true;
 	private HashMap<String, Pattern> patterns = new HashMap<String, Pattern>();
 	protected HashMap<String, HashMap<String, String>> map = new HashMap<String, HashMap<String, String>>();

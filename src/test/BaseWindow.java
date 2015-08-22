@@ -104,17 +104,17 @@ public class BaseWindow extends BorderPane implements javafx.fxml.Initializable 
 		instance = this;
 		
 		{
-			register(1, "ChatSystem", new ChatLauncher());
-			register(2, "QueueSystem", new QueueLauncher());
-			register(3, "PointSystem", new PointLauncher());
-			register(4, "CommandSystem", new CommandLauncher());
+			register(1, Addon.ADDONS.Chat   , new ChatLauncher());
+			register(2, Addon.ADDONS.Queue  , new QueueLauncher());
+			register(3, Addon.ADDONS.Point  , new PointLauncher());
+			register(4, Addon.ADDONS.Command, new CommandLauncher());
 			//register(5, "YoutubeSystem", new YoutubeLauncher());
-			for(int i = 5; i <= 8; i++)
-				register(i, "", null);
+			for(Integer i = 5; i <= 8; i++)
+				register(i, Addon.ADDONS.none, null);
 		}
 		
 	}	
-	private void register(Integer index, String name, ApplicationLauncher launcher)
+	private void register(Integer index, Addon.ADDONS name, ApplicationLauncher launcher)
 	{
 		if(launcher == null)
 		{
@@ -123,7 +123,7 @@ public class BaseWindow extends BorderPane implements javafx.fxml.Initializable 
 		}
 		else
 		{
-			numberToCheckBox(index).setText(name);
+			numberToCheckBox(index).setText(name.name());
 			Addon addon;
 			if((addon = MyBot.instance.getAddon(name)) == null)
 				numberToCheckBox(index).setVisible(false);

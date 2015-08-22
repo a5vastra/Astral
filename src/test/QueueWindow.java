@@ -2,6 +2,7 @@ package test;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import addons.Addon.*;
 import addons.QueueSystem;
 import main.MyBot;
 import javafx.animation.Animation;
@@ -28,7 +29,7 @@ public class QueueWindow extends BorderPane implements javafx.fxml.Initializable
 	public QueueSystem queueSystem()
 	{ 
 		if(queueSystem == null) 
-			queueSystem = (QueueSystem)MyBot.instance.getAddon("QueueSystem");
+			queueSystem = (QueueSystem)MyBot.instance.getAddon(ADDONS.Queue);
 		return queueSystem; 
 	}
 	public QueueWindow()

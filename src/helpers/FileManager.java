@@ -126,11 +126,11 @@ public class FileManager {
 			// staff elements
 			for(Entry<String, HashMap<String, String>> outer : map.entrySet())
 			{
-				//System.out.println(outer.getKey());
+				System.out.println(outer.getKey());
 				Element eOuter = doc.createElement(outer.getKey());
 				for(Entry<String, String> inner : outer.getValue().entrySet())
 				{
-					//System.out.println(inner.getKey()+":"+inner.getValue());
+					System.out.println(inner.getKey()+":"+inner.getValue());
 					Element eInner = doc.createElement(inner.getKey());
 					eInner.appendChild(doc.createTextNode(inner.getValue()));
 					eOuter.appendChild(eInner);

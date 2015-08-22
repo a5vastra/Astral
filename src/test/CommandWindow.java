@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import addons.Addon.ADDONS;
 import addons.CommandSystem;
 import addons.PointSystem;
 import addons.CommandSystem.Command;
@@ -36,7 +37,7 @@ public class CommandWindow extends BorderPane implements javafx.fxml.Initializab
 	public CommandSystem commandSystem()
 	{ 
 		if(commandSystem == null) 
-			commandSystem = (CommandSystem)MyBot.instance.getAddon("CommandSystem");
+			commandSystem = (CommandSystem)MyBot.instance.getAddon(ADDONS.Command);
 		return commandSystem; 
 	}
 	@FXML private TableColumn colMainIsRegex ;
@@ -159,11 +160,11 @@ public class CommandWindow extends BorderPane implements javafx.fxml.Initializab
 		if((regex + message).length() == 0) return;
 		if(chcAddRegexAccessibility.getValue() != null)
 			accessibility = chcAddRegexAccessibility.getValue().toString();
-		try
+		/*try
 		{
 			Pattern.compile(regex);
 			Command c = ((CommandSystem)MyBot.instance.getAddon("CommandSystem")).new Command("<regex='"+regex+"'/> <message='"+message+"'/>");
-			if(!c.checkCommandRegexForMatch(regex))
+			if(c.checkCommandRegexForMatch(regex))
 				throw new Exception();
 		}
 		catch(Exception e)
@@ -171,6 +172,20 @@ public class CommandWindow extends BorderPane implements javafx.fxml.Initializab
 			lblAddRegexValid.setVisible(false);
 			lblAddRegexInvalid.setVisible(true);
 			lblAddRegexInvalid.setTooltip(new Tooltip(e.getMessage()));
+			return;
+		}
+		lblAddRegexValid.setVisible(true);
+		lblAddRegexInvalid.setVisible(false);*/
+		try
+		{
+			Pattern p = Pattern.compile(regex);
+			Matcher m = p.matcher(regex);
+		}
+		catch(Exception ex)
+		{
+			lblAddRegexValid.setVisible(false);
+			lblAddRegexInvalid.setVisible(true);
+			lblAddRegexInvalid.setTooltip(new Tooltip(ex.getMessage()));
 			return;
 		}
 		lblAddRegexValid.setVisible(true);

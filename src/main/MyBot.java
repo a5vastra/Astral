@@ -17,7 +17,7 @@ import addons.QueueSystem;
 
 public class MyBot extends PircBot{
 	public static MyBot instance;
-	private HashMap<String, Addon> addonHash = new HashMap<String, Addon>();
+	private HashMap<Addon.ADDONS, Addon> addonHash = new HashMap<Addon.ADDONS, Addon>();
 	private static String ownerName; private static String botName; private static String botOperator;
 	 public MyBot(String _ownerName, String _botName, String _botOperator)
 	 {
@@ -81,7 +81,7 @@ public class MyBot extends PircBot{
 	 {
 		 addonHash.put(a.getName(), a);
 	 }
-	 public Addon getAddon(String name)
+	 public Addon getAddon(Addon.ADDONS name)
 	 {
 		 if(addonHash.containsKey(name))
 			 return addonHash.get(name);
@@ -99,11 +99,15 @@ public class MyBot extends PircBot{
 	 {
 		 return false;
 	 }
+	 public static boolean isBot(String user)
+	 {
+		 return user.equalsIgnoreCase(botName);
+	 }
 	 public static void message(String msg)
 	 {
 		 if(instance == null) return;
 		 
-		 msg = ((ChatExtrasSystem)instance.getAddon("ChatExtrasSystem")).attemptToModify(msg);
+		 msg = ((ChatExtrasSystem)instance.getAddon(Addon.ADDONS.ChatExtra)).attemptToModify(msg);
 		 
 		 instance.sendMessage("#"+ownerName, msg);
 		 instance.onMessage(botName, msg);

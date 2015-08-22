@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import addons.PointSystem;
 import addons.QueueSystem;
+import addons.Addon.ADDONS;
 import main.MyBot;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -46,7 +47,7 @@ public class PointWindow extends BorderPane implements javafx.fxml.Initializable
 	public PointSystem pointSystem()
 	{ 
 		if(pointSystem == null) 
-			pointSystem = (PointSystem)MyBot.instance.getAddon("PointSystem");
+			pointSystem = (PointSystem)MyBot.instance.getAddon(ADDONS.Point);
 		return pointSystem; 
 	}
 	public PointWindow()

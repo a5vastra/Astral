@@ -24,6 +24,7 @@ public class OldPointConversion {
 		Pattern p = Pattern.compile("^(?<key>\\w+)\t(?<value>\\d+)$");
 		while ((line = br.readLine()) != null) {
 			Matcher m = p.matcher(line);
+			System.out.println(line);
 			if(m.find())
 				list.add(ps.new PointAccount(m.group("key"), Integer.parseInt(m.group("value"))));
 		}
