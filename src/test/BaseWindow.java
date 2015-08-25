@@ -108,8 +108,9 @@ public class BaseWindow extends BorderPane implements javafx.fxml.Initializable 
 			register(2, Addon.ADDONS.Queue  , new QueueLauncher());
 			register(3, Addon.ADDONS.Point  , new PointLauncher());
 			register(4, Addon.ADDONS.Command, new CommandLauncher());
+			register(5, Addon.ADDONS.Greeter, new GreeterLauncher());
 			//register(5, "YoutubeSystem", new YoutubeLauncher());
-			for(Integer i = 5; i <= 8; i++)
+			for(Integer i = 6; i <= 8; i++)
 				register(i, Addon.ADDONS.none, null);
 		}
 		

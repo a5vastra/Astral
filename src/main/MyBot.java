@@ -11,6 +11,7 @@ import addons.Addon;
 import addons.ChatExtrasSystem;
 import addons.ChatSystem;
 import addons.CommandSystem;
+import addons.GreeterSystem;
 import addons.PointSystem;
 import addons.QueueSystem;
 
@@ -33,6 +34,7 @@ public class MyBot extends PircBot{
 		 hash(new ChatSystem());
 		 hash(new QueueSystem());
 		 hash(new ChatExtrasSystem());
+		 hash(new GreeterSystem());
 		 directMessage("hello world");
 	 }
 	 private boolean messageFound = false;
@@ -105,7 +107,7 @@ public class MyBot extends PircBot{
 	 }
 	 public static void message(String msg)
 	 {
-		 if(instance == null) return;
+		 if(instance == null || msg == "") return;
 		 
 		 msg = ((ChatExtrasSystem)instance.getAddon(Addon.ADDONS.ChatExtra)).attemptToModify(msg);
 		 
