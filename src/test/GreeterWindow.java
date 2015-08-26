@@ -1,4 +1,6 @@
 package test;
+import helpers._StringToString;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import test.CommandWindow._Command;
 import addons.GreeterSystem;
 import addons.PointSystem;
 import addons.QueueSystem;
@@ -63,4 +66,54 @@ public class GreeterWindow extends BorderPane implements javafx.fxml.Initializab
 	TableView tblGreetingGroups;
 	@FXML
 	TableView tblUserGroups;
+	@FXML
+	TableColumn tblColGreetingGroups;
+	@FXML
+	TableColumn tblColGreetingID;
+	@FXML
+	TableColumn tblColUserUsername;
+	@FXML
+	TableColumn tblColUserID;
+	@FXML
+	void OnUserAdd()
+	{
+		
+	}
+	@FXML
+	void OnUserRemove()
+	{
+		if(tblUserGroups.getSelectionModel() != null)
+		{
+			_StringToString s = (_StringToString)tblUserGroups.getSelectionModel().getSelectedItem();
+			if(s==null)
+				return;
+
+			MyBot.message(String.format("!greeterremove %s %s", GreeterSystem.MyInformation.UserGroup.name(), s.getKey()));
+		}
+	}
+	@FXML
+	void OnGreetingAdd()
+	{
+		
+	}
+	@FXML
+	void OnGreetingRemove()
+	{
+		if(tblGreetingGroups.getSelectionModel() != null)
+		{
+			_StringToString s = (_StringToString)tblGreetingGroups.getSelectionModel().getSelectedItem();
+			if(s==null)
+				return;
+			
+			MyBot.message(String.format("!greeterremove %s %s", GreeterSystem.MyInformation.GreetingGroup.name(), s.getKey()));
+		}
+	}
+	public static void forceRefresh(){
+		if(instance != null)
+			instance.refresh();
+	}
+	private void refresh()
+	{		
+		
+	}
 }

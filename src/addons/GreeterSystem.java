@@ -33,7 +33,7 @@ public class GreeterSystem extends Addon{
 		{
 			for(Entry<String, String> e : settings.entrySet())
 			{
-				addGreeting(miName, e.getValue().substring(1), e.getKey());
+				addGreeting(e.getValue().substring(1), e.getKey());
 			}
 		}
 		
@@ -42,7 +42,7 @@ public class GreeterSystem extends Addon{
 		{
 			for(Entry<String, String> e : settings.entrySet())
 			{
-				addUser(miName, e.getValue().substring(1), e.getKey());
+				addUser(e.getValue().substring(1), e.getKey());
 			}
 		}
 		
@@ -128,7 +128,7 @@ public class GreeterSystem extends Addon{
 		{
 			Pattern p;
 			Matcher m;
-			p = getOrRegisterPattern("Greeter","^!greeter(?:add|) (?<type>"+MyInformation.UserGroup.name()+"|"+MyInformation.GreetingGroup.name()+") (?<key>\\w+) (?<val>\\w+)$");
+			p = getOrRegisterPattern("GreeterAdd","^!greeter(?:add|modify) (?<type>"+MyInformation.UserGroup.name()+"|"+MyInformation.GreetingGroup.name()+") (?<key>\\w+) (?<val>\\w+)$");
 			m = p.matcher(message);
 			if(m.find())
 			{
@@ -140,11 +140,11 @@ public class GreeterSystem extends Addon{
 				
 				if(type == MyInformation.GreetingGroup.name())
 				{
-					addGreeting(type, key, val);
+					addGreeting(key, val);
 				}
-				else if(type == MyInformation.GreetingGroup.name())
+				else if(type == MyInformation.UserGroup.name())
 				{
-					addUser(type, key, val);
+					addUser(key, val);
 				}
 				else
 				{
@@ -152,23 +152,54 @@ public class GreeterSystem extends Addon{
 				}
 				msg("Successfully changed "+type+": "+key+" = "+val);
 			}
+			
+			 p = getOrRegisterPattern("GreeterRemove","^!greeter(remove) (?<type>"+MyInformation.UserGroup.name()+"|"+MyInformation.GreetingGroup.name()+") (?<key>\\w++)$");
+			 m = p.matcher(message);
+			 if(m.find())
+			 {
+				 String type, key; 
+				 type = m.group("type");
+				 key  = m.group("key");
+				 if(type == MyInformation.GreetingGroup.name())
+					{
+						removeGreeting(key);
+					}
+					else if(type == MyInformation.GreetingGroup.name())
+					{
+						removeUser(key);
+					}
+					else
+					{
+						return;
+					}
+					msg("Successfully removed "+type+": "+key);
+			 }
 		}
 	}
-	void addGreeting(String type, String key, String val)
+	//key = name, val = groupID
+	void addGreeting(String key, String val)
 	{
-		for(String e : greetingGroups.keySet())
-			greetingGroups.get(e).remove(val);
+		removeGreeting(key);
 		if(!greetingGroups.containsKey(key))
 			greetingGroups.put(key, new ArrayList<String>());
 		greetingGroups.get(key).add(val);
 	}
-	void addUser(String type, String key, String val)
+	void addUser(String key, String val)
 	{
-		for(String e : userGroups.keySet())
-			userGroups.get(e).remove(val);
+		removeUser(key);
 		if(!userGroups.containsKey(key))
 			userGroups.put(key, new ArrayList<String>());
 		userGroups.get(key).add(val);
+	}
+	void removeGreeting(String key)
+	{
+		for(String e : greetingGroups.keySet())
+			greetingGroups.get(e).remove(key);
+	}
+	void removeUser(String key)
+	{
+		for(String e : userGroups.keySet())
+			userGroups.get(e).remove(key);
 	}
 	void welcome(String user)
 	{
@@ -203,7 +234,7 @@ public class GreeterSystem extends Addon{
 	{
 		
 	}
-	enum MyInformation
+	public enum MyInformation
 	{
 		UserGroup, GreetingGroup
 	}
