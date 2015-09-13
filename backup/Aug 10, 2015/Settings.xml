@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Settings>
   <Settings>
-    <ChannelOwner>a5vastra</ChannelOwner>
+    <ChannelOwner>game_n_poo</ChannelOwner>
     <BotOauth>oauth:b2myk8mwj2dq3q8fh1fgosuosnr7op</BotOauth>
     <BotName>a5vbot</BotName>
-    <BotOperator>a5vastra</BotOperator>
+    <BotOperator>game_n_poo</BotOperator>
   </Settings>
 </Settings>

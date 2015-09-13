@@ -88,6 +88,14 @@ public class PointSystem extends Addon{
 		Pattern p;
 		Matcher m;
 		message = message.replace(pointName(), "point");
+		
+		{
+			PointAccount pa = findPointAccount(sender);
+			if(pa == null)
+				pointAccounts.add(pa = new PointAccount(sender, 0));
+			pa.addMessage();
+		}
+		
 		if(MyBot.isOwner(sender))
 		{
 			p = getOrRegisterPattern("pointAward", "^!pointaward (?<name>\\w+) (?<points>\\d+)$");
@@ -211,12 +219,7 @@ public class PointSystem extends Addon{
 		}
 		
 		
-		{
-			PointAccount pa = findPointAccount(sender);
-			if(pa == null)
-				pointAccounts.add(pa = new PointAccount(sender, 0));
-			pa.addMessage();
-		}
+		
 		
 		if(changed)
 		{
@@ -326,7 +329,10 @@ public class PointSystem extends Addon{
 		{
 			boolean result = (points + toAdd >= 0);
 			if(result)
+			{
 				points += toAdd;
+				Save();
+			}
 			else
 				msg(name+", you don't have enough points to do that.");
 			return result;

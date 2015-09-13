@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PointSystem>
+  <Points>
+    <_Friend51>0</_Friend51>
+  </Points>
+  <Settings>
+    <pointName>point</pointName>
+    <followerRewardMultiplier>2</followerRewardMultiplier>
+    <minimumMessagesRequired>1</minimumMessagesRequired>
+    <minimumMinutesRequired>10</minimumMinutesRequired>
+    <pointReward>2</pointReward>
+  </Settings>
+</PointSystem>

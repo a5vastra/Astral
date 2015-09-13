@@ -62,18 +62,18 @@ public class GreeterSystem extends Addon{
 		{
 			for(String e2: greetingGroups.get(e))
 			{
-				temp.put(e2, e);
+				temp.put(e, e2);
 			}
 		}
 		map.put(miName, temp);
 		
 		miName = MyInformation.UserGroup.name();
 		temp.clear();
-		for(String e : greetingGroups.keySet())
+		for(String e : userGroups.keySet())
 		{
-			for(String e2: greetingGroups.get(e))
+			for(String e2: userGroups.get(e))
 			{
-				temp.put(e2, e);
+				temp.put(e, e2);
 			}
 		}
 		map.put(miName, temp);
@@ -124,25 +124,27 @@ public class GreeterSystem extends Addon{
 	@Override
 	public void onMsg(String user, String message)
 	{
+		boolean wasChanged = false;
 		if(MyBot.instance.isOwner(user))
 		{
 			Pattern p;
 			Matcher m;
-			p = getOrRegisterPattern("GreeterAdd","^!greeter(?:add|modify) (?<type>"+MyInformation.UserGroup.name()+"|"+MyInformation.GreetingGroup.name()+") (?<key>\\w+) (?<val>\\w+)$");
+			p = getOrRegisterPattern("GreeterAdd","^!greeter(?:add|modify) (?<type>"+MyInformation.UserGroup.name()+"|"+MyInformation.GreetingGroup.name()+") (?<key>\\w+) (?<val>.+)$");
 			m = p.matcher(message);
 			if(m.find())
 			{
+				wasChanged = true;
 				String type, key, val;
 				type = m.group("type");
 				key  = m.group("key" );
 				val  = m.group("val" );
 				
 				
-				if(type == MyInformation.GreetingGroup.name())
+				if(type.equalsIgnoreCase(MyInformation.GreetingGroup.name()))
 				{
 					addGreeting(key, val);
 				}
-				else if(type == MyInformation.UserGroup.name())
+				else if(type.equalsIgnoreCase(MyInformation.UserGroup.name()))
 				{
 					addUser(key, val);
 				}
@@ -157,14 +159,15 @@ public class GreeterSystem extends Addon{
 			 m = p.matcher(message);
 			 if(m.find())
 			 {
+				 wasChanged = true;
 				 String type, key; 
 				 type = m.group("type");
 				 key  = m.group("key");
-				 if(type == MyInformation.GreetingGroup.name())
+				 if(type.equalsIgnoreCase(MyInformation.GreetingGroup.name()))
 					{
 						removeGreeting(key);
 					}
-					else if(type == MyInformation.GreetingGroup.name())
+					else if(type.equalsIgnoreCase(MyInformation.UserGroup.name()))
 					{
 						removeUser(key);
 					}
@@ -173,6 +176,11 @@ public class GreeterSystem extends Addon{
 						return;
 					}
 					msg("Successfully removed "+type+": "+key);
+			 }
+			 
+			 if(wasChanged)
+			 {
+				 Save();
 			 }
 		}
 	}
