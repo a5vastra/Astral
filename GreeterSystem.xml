@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <GreeterSystem>
-  <GreetingGroup/>
-  <UserGroup/>
+  <GreetingGroup>
+    <_default>hello</_default>
+    <_admin>hello, master</_admin>
+  </GreetingGroup>
+  <UserGroup>
+    <_a5vastra>admin</_a5vastra>
+  </UserGroup>
 </GreeterSystem>

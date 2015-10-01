@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <CommandSystem>
-  <Commands/>
+  <Commands>
+    <__0>&amp;lt;command=&amp;apos;!test&amp;apos;/&amp;gt; &amp;lt;message=&amp;apos;this is a test&amp;apos;/&amp;gt; &amp;lt;accessibility=&amp;apos;all&amp;apos;/&amp;gt; </__0>
+  </Commands>
 </CommandSystem>

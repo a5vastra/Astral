@@ -58,9 +58,6 @@ public class CommandSystem extends Addon{
 	@Override
 	public void onMsg(String sender, String message)
 	{
-		if(MyBot.isBot(sender))
-			return;
-		
 		boolean changeMade = false;
 		if(MyBot.isOwner(sender))
 		{
@@ -122,7 +119,7 @@ public class CommandSystem extends Addon{
 			if(c.isMatch(sender, message))
 			{
 				String out = c.message.replace("$u", sender);
-				if(c.isRegex())
+				if(c.isRegex() && !MyBot.isBot(sender))
 				{
 					Matcher m2;
 					m2 = c.pattern.matcher(message);
@@ -150,7 +147,7 @@ public class CommandSystem extends Addon{
 				msg(out);
 			}
 		}
-		if(changeMade)
+		if(changeMade || this.foundHere)
 		{
 			Save();
 			CommandWindow.forceRefresh();

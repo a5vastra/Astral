@@ -14,6 +14,7 @@ import addons.CommandSystem;
 import addons.GreeterSystem;
 import addons.PointSystem;
 import addons.QueueSystem;
+import helpers.MiniTimer;
 
 
 public class MyBot extends PircBot{
@@ -110,6 +111,8 @@ public class MyBot extends PircBot{
 		 if(instance == null || msg == "") return;
 		 
 		 msg = ((ChatExtrasSystem)instance.getAddon(Addon.ADDONS.ChatExtra)).attemptToModify(msg);
+		 
+		 if(instance == null || msg == "") return;
 		 
 		 instance.sendMessage("#"+ownerName, msg);
 		 instance.onMessage(botName, msg);

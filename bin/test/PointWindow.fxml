@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane opacity="0.95" prefHeight="378.0" prefWidth="473.0" style="-fx-background-color: #000000; -fx-border-color: #000000; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.PointWindow">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <BorderPane prefHeight="22.0" prefWidth="200.0" style="-fx-background-color: #15171a;" BorderPane.alignment="CENTER">
+               <center>
+                  <Label prefHeight="17.0" prefWidth="166.0" text="a5vBot Astral :: Point System" textFill="WHITE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Seravek ExtraLight" size="13.0" />
+                     </font>
+                  </Label>
+               </center>
+               <effect>
+                  <Glow />
+               </effect>
+            </BorderPane>
+         </top>
+         <center>
+            <TabPane opacity="0.95" prefHeight="200.0" prefWidth="200.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab text="Main">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.95" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tblMain" editable="true" prefHeight="295.0" prefWidth="441.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="colMainRank" editable="false" prefWidth="75.0" text="Rank" />
+                                  <TableColumn fx:id="colMainName" editable="false" prefWidth="206.0" text="Name" />
+                                    <TableColumn fx:id="colMainPoints" prefWidth="97.0" text="Points" />
+                                    <TableColumn fx:id="colMainDelta" prefWidth="62.0" text="Delta" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Visualization">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #EEEEEE;">
+                           <children>
+                              <BarChart fx:id="chtVisualization" layoutY="7.0" legendVisible="false" prefHeight="275.0" prefWidth="439.0" titleSide="BOTTOM" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="7.0">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </BarChart>
+                              <Slider fx:id="sldrVisualization" layoutX="9.0" layoutY="322.0" max="25.0" min="1.0" prefHeight="25.0" prefWidth="424.0" value="1.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="7.0" />
+                              <Label fx:id="lblVisualization" alignment="CENTER" layoutX="1.0" layoutY="282.0" prefHeight="33.0" prefWidth="442.0" text="Top Viewers (Points) " textAlignment="CENTER" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-3.0">
+                                 <font>
+                                    <Font name="Seravek ExtraLight" size="27.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Settings">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.95" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tblSettings" editable="true" prefHeight="357.0" prefWidth="442.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="colSettingsSetting" editable="false" prefWidth="233.0" text="Setting" />
+                                  <TableColumn fx:id="colSettingsValue" prefWidth="206.0" text="Value" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </center>
+         <effect>
+            <Glow level="0.17" />
+         </effect>
+      </BorderPane>
+   </children>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>

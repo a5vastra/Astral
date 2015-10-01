@@ -30,6 +30,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 
 public class FileManager {
 	String name;
@@ -85,7 +87,7 @@ public class FileManager {
 					Node outerNode = outerNodeList.item(i);
 					if(outerNode.getNodeType() == Node.ELEMENT_NODE && outerNode.hasChildNodes())
 					{
-						//System.out.println(outerNode.getNodeName());
+						System.out.println(outerNode.getNodeName());
 						NodeList innerNodeList = outerNode.getChildNodes();
 						HashMap<String, String> innerMap = new HashMap<String, String>();
 						for(int j = 0; j < innerNodeList.getLength(); j++)
@@ -93,13 +95,15 @@ public class FileManager {
 							Node innerNode = innerNodeList.item(j);
 							if(innerNode.getNodeType() == Node.ELEMENT_NODE)
 							{
-								//System.out.println("\t"+innerNode.getNodeName()+"] ["+innerNode.getTextContent());
+								System.out.println("\t"+innerNode.getNodeName()+"] ["+innerNode.getTextContent());
 								String key = innerNode.getNodeName();
-								String value = innerNode.getTextContent();
+								String value = StringEscapeUtils.unescapeXml(innerNode.getTextContent());
+								if(key.startsWith("_"))
+									key = key.substring(1);
 								innerMap.put(key, value);
 							}
 						}
-						map.put(outerNode.getNodeName(), innerMap);
+						map.put(StringEscapeUtils.unescapeXml(outerNode.getNodeName()), innerMap);
 					}
 				}
 			}
@@ -126,13 +130,13 @@ public class FileManager {
 			// staff elements
 			for(Entry<String, HashMap<String, String>> outer : map.entrySet())
 			{
-				System.out.println(outer.getKey());
+				System.out.println("outer:"+outer.getKey());
 				Element eOuter = doc.createElement(outer.getKey());
 				for(Entry<String, String> inner : outer.getValue().entrySet())
 				{
-					System.out.println(inner.getKey()+":"+inner.getValue());
-					Element eInner = doc.createElement(inner.getKey());
-					eInner.appendChild(doc.createTextNode(inner.getValue()));
+					System.out.println("inner:"+inner.getKey()+":"+inner.getValue());
+					Element eInner = doc.createElement("_"+inner.getKey());
+					eInner.appendChild(doc.createTextNode(StringEscapeUtils.escapeXml10(inner.getValue())));
 					eOuter.appendChild(eInner);
 				}
 				rootElement.appendChild(eOuter);

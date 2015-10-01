@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane fx:id="Base" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="100.0" minWidth="100.0" prefHeight="200.0" prefWidth="300.0" style="-fx-border-color: #000000; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.ChatWindow">
+   <bottom>
+      <BorderPane prefHeight="32.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <center>
+            <TextField fx:id="txfInput" opacity="0.64" promptText="Enter Text Here" style="-fx-background-color: #F0F8FF; -fx-text-fill: #000000;" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Seravek Medium" size="13.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="5.0" radius="2.0" width="5.0" />
+               </effect>
+            </TextField>
+         </center>
+         <right>
+            <Button fx:id="btnEnter" defaultButton="true" mnemonicParsing="false" onAction="#enterButton" text="Enter" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Seravek Medium" size="13.0" />
+               </font>
+            </Button>
+         </right>
+      </BorderPane>
+   </bottom>
+   <center>
+      <TextArea fx:id="txaAllMessages" editable="false" opacity="0.9" prefHeight="200.0" prefWidth="200.0" promptText="Chat Messages Go Here" style="-fx-text-fill: black;" wrapText="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Seravek Medium" size="14.0" />
+         </font>
+      </TextArea>
+   </center>
+   <effect>
+      <Bloom threshold="0.99" />
+   </effect>
+   <top>
+      <BorderPane opacity="0.9" prefHeight="19.0" prefWidth="290.0" style="-fx-background-color: #15171a;" BorderPane.alignment="CENTER">
+         <center>
+            <Label text="a5vBot Astral :: Chat Window" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Seravek ExtraLight" size="13.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </top>
+</BorderPane>

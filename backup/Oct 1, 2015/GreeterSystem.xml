@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<GreeterSystem>
+  <GreetingGroup>
+    <_default>hello</_default>
+    <_admin>hello, master</_admin>
+  </GreetingGroup>
+  <UserGroup>
+    <_admin>a5vastra</_admin>
+  </UserGroup>
+</GreeterSystem>

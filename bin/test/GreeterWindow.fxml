@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane opacity="0.95" prefHeight="346.0" prefWidth="719.0" style="-fx-background-color: #000000; -fx-border-color: #000000; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.GreeterWindow">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <BorderPane prefHeight="22.0" prefWidth="200.0" style="-fx-background-color: #15171a;" BorderPane.alignment="CENTER">
+               <center>
+                  <Label prefHeight="17.0" prefWidth="197.0" text="a5vBot Astral :: Greeter System" textFill="WHITE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Seravek ExtraLight" size="13.0" />
+                     </font>
+                  </Label>
+               </center>
+               <effect>
+                  <Glow />
+               </effect>
+            </BorderPane>
+         </top>
+         <center>
+            <TabPane opacity="0.95" prefHeight="446.0" prefWidth="759.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                  <Tab text="Greetings">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.95" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="313.0" prefWidth="675.0">
+                                 <center>
+                                    <TableView fx:id="tblGreetingGroups" editable="true" prefHeight="265.0" prefWidth="503.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+                                       <columns>
+                                          <TableColumn fx:id="tblColGreetingID" editable="false" prefWidth="128.0" text="Group ID" />
+                                          <TableColumn fx:id="tblColGreetingGreeting" editable="false" minWidth="0.0" prefWidth="545.0" text="Greeting" />
+                                       </columns>
+                                    </TableView>
+                                 </center>
+                                 <bottom>
+                                    <HBox prefHeight="27.0" prefWidth="675.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Pane prefHeight="27.0" prefWidth="572.0" />
+                                          <Button id="Greetings_Plus" mnemonicParsing="false" onAction="#OnGreetingAdd" prefHeight="26.0" prefWidth="50.0" text="+" />
+                                          <Button id="Greetings_Minus" mnemonicParsing="false" onAction="#OnGreetingRemove" prefHeight="26.0" prefWidth="50.0" text="-" />
+                                       </children>
+                                    </HBox>
+                                 </bottom>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="User Groups">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" opacity="0.95" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="313.0" prefWidth="675.0">
+                                 <bottom>
+                                    <HBox prefHeight="27.0" prefWidth="675.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Pane prefHeight="27.0" prefWidth="572.0" />
+                                          <Button id="Groups_Plus" mnemonicParsing="false" onAction="#OnUserAdd" prefHeight="26.0" prefWidth="50.0" text="+" />
+                                          <Button id="Groups_Minus" mnemonicParsing="false" onAction="#OnUserRemove" prefHeight="26.0" prefWidth="50.0" text="-" />
+                                       </children>
+                                    </HBox>
+                                 </bottom>
+                                 <center>
+                                    <TableView fx:id="tblUserGroups" editable="true" prefHeight="265.0" prefWidth="503.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+                                       <columns>
+                                          <TableColumn fx:id="tblColUserID" editable="false" prefWidth="128.0" text="Group ID" />
+                                          <TableColumn fx:id="tblColUserUsername" editable="false" minWidth="0.0" prefWidth="545.0" text="Username" />
+                                       </columns>
+                                    </TableView>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </center>
+         <effect>
+            <Glow level="0.17" />
+         </effect>
+      </BorderPane>
+   </children>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>

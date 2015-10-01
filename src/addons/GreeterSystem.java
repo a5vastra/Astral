@@ -10,10 +10,12 @@ import java.util.regex.Pattern;
 
 import main.MyBot;
 
-public class GreeterSystem extends Addon{
+public class GreeterSystem extends Addon{      
 	public GreeterSystem()
 	{
 		myName = ADDONS.Greeter;
+		Load();
+		Save();
 	}
 	public enum STATUS{ Joined, Left, LeftRecently, Unknown }
 	//Format: USER_GROUP_1, { hey $u, welcome $u }
@@ -33,7 +35,7 @@ public class GreeterSystem extends Addon{
 		{
 			for(Entry<String, String> e : settings.entrySet())
 			{
-				addGreeting(e.getValue().substring(1), e.getKey());
+				addGreeting(e.getKey(), e.getValue());
 			}
 		}
 		
@@ -42,10 +44,9 @@ public class GreeterSystem extends Addon{
 		{
 			for(Entry<String, String> e : settings.entrySet())
 			{
-				addUser(e.getValue().substring(1), e.getKey());
+				addUser(e.getKey(), e.getValue());
 			}
 		}
-		
 	}
 	@Override
 	public void Save()
@@ -53,30 +54,29 @@ public class GreeterSystem extends Addon{
 		FileManager fm = new FileManager(getSystemName());
 		String miName;
 		
-		miName = MyInformation.GreetingGroup.name();
 		map = new HashMap<String, HashMap<String, String>>();
-		HashMap<String, String> temp = new HashMap<String, String>();
+		HashMap<String, String> temp1 = new HashMap<String, String>();
+		HashMap<String, String> temp2 = new HashMap<String, String>();
 		
-		temp.clear();
+		miName = MyInformation.GreetingGroup.name();
 		for(String e : greetingGroups.keySet())
 		{
 			for(String e2: greetingGroups.get(e))
 			{
-				temp.put(e, e2);
+				temp1.put(e, e2);
 			}
 		}
-		map.put(miName, temp);
+		map.put( MyInformation.GreetingGroup.name(), temp1);
 		
 		miName = MyInformation.UserGroup.name();
-		temp.clear();
 		for(String e : userGroups.keySet())
 		{
 			for(String e2: userGroups.get(e))
 			{
-				temp.put(e, e2);
+				temp2.put(e, e2);
 			}
 		}
-		map.put(miName, temp);
+		map.put( MyInformation.UserGroup.name(), temp2);
 		
 		
 		fm.Create(getSystemName(), map);
@@ -104,8 +104,8 @@ public class GreeterSystem extends Addon{
 		}
 		else
 		{
-			welcome(user);
 			statusMap.put(user, STATUS.Joined);
+			welcome(user);
 		}
 	}
 	@Override
@@ -124,16 +124,15 @@ public class GreeterSystem extends Addon{
 	@Override
 	public void onMsg(String user, String message)
 	{
-		boolean wasChanged = false;
-		if(MyBot.instance.isOwner(user))
+		onJoin(user);
+		if(MyBot.isOwner(user))
 		{
 			Pattern p;
 			Matcher m;
 			p = getOrRegisterPattern("GreeterAdd","^!greeter(?:add|modify) (?<type>"+MyInformation.UserGroup.name()+"|"+MyInformation.GreetingGroup.name()+") (?<key>\\w+) (?<val>.+)$");
 			m = p.matcher(message);
-			if(m.find())
+			if(find(m))
 			{
-				wasChanged = true;
 				String type, key, val;
 				type = m.group("type");
 				key  = m.group("key" );
@@ -157,9 +156,8 @@ public class GreeterSystem extends Addon{
 			
 			 p = getOrRegisterPattern("GreeterRemove","^!greeter(remove) (?<type>"+MyInformation.UserGroup.name()+"|"+MyInformation.GreetingGroup.name()+") (?<key>\\w++)$");
 			 m = p.matcher(message);
-			 if(m.find())
+			 if(find(m))
 			 {
-				 wasChanged = true;
 				 String type, key; 
 				 type = m.group("type");
 				 key  = m.group("key");
@@ -178,26 +176,28 @@ public class GreeterSystem extends Addon{
 					msg("Successfully removed "+type+": "+key);
 			 }
 			 
-			 if(wasChanged)
+			 if(foundHere)
 			 {
 				 Save();
 			 }
 		}
 	}
-	//key = name, val = groupID
+	//key = groupID, val = response
 	void addGreeting(String key, String val)
 	{
-		removeGreeting(key);
 		if(!greetingGroups.containsKey(key))
 			greetingGroups.put(key, new ArrayList<String>());
 		greetingGroups.get(key).add(val);
+		System.out.println("//added greeting "+key+" : "+val+"//");
 	}
+	//key = name, val = groupID
 	void addUser(String key, String val)
 	{
 		removeUser(key);
-		if(!userGroups.containsKey(key))
-			userGroups.put(key, new ArrayList<String>());
-		userGroups.get(key).add(val);
+		if(!userGroups.containsKey(val))
+			userGroups.put(val, new ArrayList<String>());
+		userGroups.get(val).add(key);
+		System.out.println("//added user "+key+" : "+val+"//");
 	}
 	void removeGreeting(String key)
 	{
@@ -213,9 +213,9 @@ public class GreeterSystem extends Addon{
 	{
 		String out = "";
 		int count;
-		final String EMPTY_KEY = "";
+		final String EMPTY_KEY = "default";
 		Random r = new Random();
-		
+		//System.out.println();
 		String group = null;
 		for(String userGroup : userGroups.keySet())
 		{
@@ -226,15 +226,17 @@ public class GreeterSystem extends Addon{
 			}
 		}
 		
-		if(group != null)
-		{			
-			count = greetingGroups.get(group).size();
-			out = greetingGroups.get(group).get(r.nextInt(count));
-		}
-		else if(userGroups.containsKey(EMPTY_KEY))
+		if(greetingGroups.containsKey(group))
 		{
-			count = greetingGroups.get(EMPTY_KEY).size();
-			out = greetingGroups.get(EMPTY_KEY).get(r.nextInt(count));
+			count = greetingGroups.get(group).size();
+			if(group != null)
+			{
+				out = greetingGroups.get(group).get(r.nextInt(count));				
+			}
+			else if(userGroups.containsKey(EMPTY_KEY))
+			{
+				out = greetingGroups.get(EMPTY_KEY).get(r.nextInt(count));
+			}
 		}
 		msg(out);
 	}
