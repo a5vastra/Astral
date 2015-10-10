@@ -96,7 +96,7 @@ public class PointSystem extends Addon{
 			pa.addMessage();
 		}
 		
-		if(MyBot.isOwner(sender))
+		if(MyBot.isOwner(sender) || MyBot.isBot(sender))
 		{
 			p = getOrRegisterPattern("pointAward", "^!pointaward (?<name>\\w+) (?<points>\\d+)$");
 			m = p.matcher(message);

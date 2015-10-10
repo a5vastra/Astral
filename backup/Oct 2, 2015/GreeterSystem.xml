@@ -5,6 +5,6 @@
     <_admin>hello, master</_admin>
   </GreetingGroup>
   <UserGroup>
-    <_admin>a5vastra</_admin>
+    <_a5vastra>admin</_a5vastra>
   </UserGroup>
 </GreeterSystem>

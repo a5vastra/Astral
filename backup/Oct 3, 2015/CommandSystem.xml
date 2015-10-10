@@ -2,6 +2,5 @@
 <CommandSystem>
   <Commands>
     <__0>&amp;lt;command=&amp;apos;!test&amp;apos;/&amp;gt; &amp;lt;message=&amp;apos;this is a test&amp;apos;/&amp;gt; &amp;lt;accessibility=&amp;apos;all&amp;apos;/&amp;gt; </__0>
-    <__1>&amp;lt;command=&amp;apos;!myraffle&amp;apos;/&amp;gt; &amp;lt;message=&amp;apos;!raffle limit=2 entryfee=10 maxentriesper=1 reward=100&amp;apos;/&amp;gt; &amp;lt;accessibility=&amp;apos;admin&amp;apos;/&amp;gt; </__1>
   </Commands>
 </CommandSystem>

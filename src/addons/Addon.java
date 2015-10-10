@@ -9,7 +9,7 @@ import main.MyBot;
 
 
 public abstract class Addon {
-	public enum ADDONS{ChatExtra,Chat,Command,Greeter,Point,Queue,none}
+	public enum ADDONS{ChatExtra,Chat,Command,Greeter,Point,Queue,Raffler,none}
 	protected ADDONS myName;
 	public ADDONS getName(){ return myName; }
 	public String getSystemName(){ return myName.name()+"System";}
@@ -18,6 +18,7 @@ public abstract class Addon {
 	protected HashMap<String, HashMap<String, String>> map = new HashMap<String, HashMap<String, String>>();
 	private HashMap<String, MiniTimer> timers = new HashMap<String, MiniTimer>();
 	protected HashMap<String, String> settings = new HashMap<String, String>();
+	protected HashMap<String, String> customMessages = new HashMap<String, String>();
 	public Addon()
 	{
 		
@@ -88,6 +89,7 @@ public abstract class Addon {
 	public void enable()
 	{
 		enabled = true;
+		MyBot.message("");
 	}
 	public void disable()
 	{
@@ -119,6 +121,10 @@ public abstract class Addon {
 	{
 		MyBot.message(msg);
 	}
+	public void msg(String msg, String sender)
+	{
+		MyBot.message(msg.contains("$u")?msg.replace("$u", sender):msg);
+	}
 	public void error(String msg)
 	{
 		
@@ -137,4 +143,6 @@ public abstract class Addon {
 		s = settings.get(s);
 		return s == null?def:s;
 	}
+	protected final String _start = "(\\(|\\[|<)";
+	protected final String _end   = "(\\)|\\]|>)";
 }

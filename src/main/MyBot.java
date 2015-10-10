@@ -14,6 +14,7 @@ import addons.CommandSystem;
 import addons.GreeterSystem;
 import addons.PointSystem;
 import addons.QueueSystem;
+import addons.RafflerSystem;
 import helpers.MiniTimer;
 
 
@@ -36,6 +37,7 @@ public class MyBot extends PircBot{
 		 hash(new QueueSystem());
 		 hash(new ChatExtrasSystem());
 		 hash(new GreeterSystem());
+		 hash(new RafflerSystem());
 		 directMessage("hello world");
 	 }
 	 private boolean messageFound = false;

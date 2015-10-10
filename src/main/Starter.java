@@ -5,8 +5,12 @@ import helpers.FileManager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import test.BaseLauncher;
 import test.ChatLauncher;
@@ -18,7 +22,7 @@ public class Starter {
     
     public static void main(String[] args)
     {
-    	try
+     	try
     	{
 	    	File file = new File("Settings.xml");
 	        if(args.length != 0)
