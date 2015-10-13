@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import helpers.MiniTimer;
 
 import main.MyBot;
 
-public class RafflerSystem extends Addon {
+public class RafflerSystem extends Addon{
 	public RafflerSystem()
 	{
 		myName = ADDONS.Raffler;
@@ -34,7 +35,12 @@ public class RafflerSystem extends Addon {
 		customMessages.put(ACTIONS.NextWinner.name() , "The next winner has been chosen.");
 		customMessages.put(ACTIONS.Refund.name()     , "Raffle is being refunded.");
 		customMessages.put(ACTIONS.Show.name()       , "");
+		
+		claimTimers = new ArrayList<MiniTimer>();
 	}
+	MiniTimer timer;
+	List<MiniTimer> claimTimers;
+	
 	PointSystem _pointSystem;
 	PointSystem getPointSystem(){ 
 		return _pointSystem = 
@@ -44,6 +50,7 @@ public class RafflerSystem extends Addon {
 				)
 		;
 	}
+	int raffleID = 0;
 	@Override
 	public void onMsg(String user, String msg){
 		if(msg.equalsIgnoreCase("!raffle"))
@@ -132,6 +139,12 @@ public class RafflerSystem extends Addon {
 						case Start:
 							if(started)
 								return;
+							int time = getNumberSetting(SETTINGS.Timer);
+							if(time > 0)
+							{
+								timer = new MiniTimer(this, raffleID+"", time, 0);
+								msg("Raffle will autoend in "+time+" seconds.");
+							}
 							started = true;
 							raffleEntrants = new ArrayList<String>();
 							raffleWinners = new HashMap<String, Integer>();
@@ -140,6 +153,7 @@ public class RafflerSystem extends Addon {
 							if(!started)
 								return;
 							started = false;
+							raffleID++;
 							break;
 						case Clear:
 							raffleEntrants.clear();
@@ -249,7 +263,7 @@ public class RafflerSystem extends Addon {
 		Matcher m = p.matcher(val);     //make sure that the val matches the pattern 
 		if(m.find())
 		{
-			getSettings().put(key, val);
+			getSettings().put(s.name(), val);
 			msg("Successfully changed raffle "+key+" to "+val);
 		}
 	}
@@ -258,7 +272,7 @@ public class RafflerSystem extends Addon {
 	private HashMap<String, Integer> raffleWinners;
 	private HashMap<SETTINGS, Pattern> settingList;
 	private List<ACTIONS> actionList;
-	private enum SETTINGS{Timer, Reward, EntryFee, Limit, MaxEntriesPer}
+	private enum SETTINGS{Timer, Reward, EntryFee, Limit, MaxEntriesPer, ClaimTime}
 	private enum ACTIONS{Start, End, Clear, Enter, Cancel, Claim, NextWinner, Refund, Show}
 	private int getNumberSetting(SETTINGS s)
 	{
@@ -274,6 +288,14 @@ public class RafflerSystem extends Addon {
 		catch(Exception e)
 		{
 			return -1;
+		}
+	}
+	public void doneWithTime(String id)
+	{
+		if(id.equals(raffleID+""))
+		{
+			msg("Raffle is autoending.");
+			onMsg(MyBot.instance.getName(), "!raffle end");
 		}
 	}
 }
